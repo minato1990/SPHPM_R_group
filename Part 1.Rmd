@@ -1,0 +1,910 @@
+---
+title: "Introduction to R -  Week 1"
+author: "By Caroline Gao"
+
+output:
+  html_document:
+    theme: cerulean
+    highlight: tango
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set()
+
+```
+
+
+```{r, , include=FALSE}
+#install.packages("captioner")
+library(captioner)
+Challenge_nums <- captioner(prefix = "Challenge")
+```
+The materials used here are based on the Software carpentry workshop "R for Reproducible Scientific Analysis"
+
+## Introduction to Rstudio 
+
+
+We will be using RStudio: a free, open-source R integrated development environment. It provides a built-in editor, works on all platforms (including on servers) and provides many advantages such as integration with version control and project management.
+
+### Basic layout
+
+RStudio include four panels:
+
+* The interactive R console in the lower left (entire left when you first opened it)
+* Editor panel in the upper left
+* Environment/History tabbed in upper right
+* Files/Plots/Packages/Help/Viewer tabbed in lower right
+
+### Work flow 
+
+There are many ways one can work within RStudio. The easy way would be start to writing in an .R file and use  RStudio command/short-cut to push the current line or selected lines to the interactive R console. This is a great way to start as all your code is saved for later.
+
+To run the **current line** code from the editor window you can:
+
+1. click on the Run button above the editor panel, or 
+2. select Run Lines from the Code menu, or 
+3. hit Ctrl-Enter in Windows or Linux or Command-Enter on OS X. 
+
+To run a block of code, select it and then Run. 
+
+### Working directory
+
+Unlike Jupyter notebook, R does not set the working directory to the folder where your script locates. The default working directory is normally the user home directory. How Rstudio handling working directory depends on how Rstudio is launched and how R project is used. (https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces). 
+
+There are a few ways to setup/change current working directories: 
+
+* Use the setwd() R function
+* Use the Tools | Change Working Dir menu. This will also change directory location of the Files pane.
+* From within the Files pane, use the More | Set As Working Directory menu. (Navigation within the Files pane alone will not change the working directory.)
+
+To check your current working directory you can use getwd() function.
+```{r}
+getwd()
+
+```
+When using R markdown root.dir can be specified using 
+
+knitr::opts_knit$set(echo = TRUE, root.dir = "...")
+
+
+### Project 
+
+A better way for managing your data and script files is to create a project. 
+
+1. Click the File menu button, then New Project.
+2. Click New Directory.
+3. Click Empty Project.
+4. Type in the name of the directory to store your project, e.g. R Summer Camp".
+5. Click the Create Project button.
+
+You can read the paper [Best Practices for Scientific Computing](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745) for further tips on best practices for programming and project organization. 
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="project",caption = "")`</span> Create a new project in RStudio named R support classes and create a R Script named Week 1
+
+
+## Basic R arithmetics and operators
+
+### R arithmetic
+
+From highest to lowest precedence:
+
+* Parentheses: (, )
+* Exponents: ^ or **
+* Divide: /
+* Multiply: *
+* Add: +
+* Subtract: -
+
+Also 
+* Remainder: %%	
+* Integer Division: %/%	
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="integer division",caption = "")`</span> Should 1 %/% 0.2 be 4 or 5? 
+```{r,  echo=FALSE, results="hide"}
+# your code: 
+1 %/% 0.2 
+```
+
+**Note** %% and x %/% y can be used for non-integer y, e.g. 1 %/% 0.2, but the results are subject to representation error and so may be platform-dependent. Because the IEC 60059 representation of 0.2 is a binary fraction slightly larger than 0.2, the answer to 1 %/% 0.2 should be 4 but many platforms give 5. So make sure you write 10%/%2. 
+
+### Mathematical functions
+
+R has many built in mathematical functions. To call a function, we simply type its name, followed by open and closing parentheses. Anything we type inside the parentheses is called the function argument:
+
+```{r}
+log(1)
+exp(1)
+```
+
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="logarithms",caption = "")`</span> Find the logarithms with bases 2 and 10 of 5, 
+
+
+```{r,  echo=FALSE, results="hide"}
+# Your code:
+log2(5)
+log10(5)
+```
+
+### Comparing things
+
+We can also do comparison in R:
+
+* Equality: ==
+* Inequality: !=
+* Greater than: >
+* Greater than or equal to: >=
+* Smaller than: <
+* Smaller than or equal to: <=
+
+** Note** You should never use == to compare two numbers unless they are integers (a data type which can specifically represent only whole numbers). Computers may only represent decimal numbers with a certain degree of precision, so two numbers which look the same when printed out by R, may actually have different underlying representations and therefore be different by a small margin of error (called machine numeric tolerance). Instead, you should use the all.equal function. Further reading: http://floating-point-gui.de/
+
+### Variables and assignment
+
+We can store values in variables using the assignment operator <-, like this:
+```{r}
+a<- 1
+b<- 2
+c<- a+b
+c
+```
+
+Assignment values can contain the variable being assigned to:
+```{r}
+a<-1
+b<-a+1
+b
+```
+
+Variable names can contain letters, numbers, underscores and periods. They cannot start with a number nor contain spaces at all. Different people use different conventions for long variable names, these include:
+
+* periods.between.words
+* underscores_between_words
+* camelCaseToSeparateWords
+
+
+## Working with R 
+
+### Add comments 
+
+You can start a comment after the hash symbol #. Everything after # is ignored by R when it executes code.
+
+### Managing your environment
+
+There are a few useful commands you can use to interact with the R session.
+
+ls will list all of the variables and functions stored in the global environment (your working R session):
+```{r,}
+ls()
+```
+
+**Note:** ls will hide any variables or functions starting with a . by default. To list all objects, type ls(all.names=TRUE) instead.
+
+You can use rm to delete objects you no longer need:
+```{r}
+rm(x)
+```
+
+If you have lots of things in your environment and want to delete all of them, you can pass the results of ls to the rm function:
+```{r, eval=FALSE}
+rm(list = ls())
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="remove",caption = "")` </span> Clean up your working environment by deleting the mass and age variables.
+```{r,  echo=FALSE, results="hide"}
+# your code:
+rm(age,mass)
+```
+
+### R Packages
+
+It is possible to add functions to R by writing a package, or by obtaining a package written by someone else. As of this writing, there are over 7,000 packages available on CRAN (the comprehensive R archive network). R and RStudio have functionality for managing packages:
+
+* You can see what packages are installed by typing installed.packages()
+* You can install packages by typing install.packages("packagename")
+* You can update installed packages by typing update.packages()
+* You can remove a package with remove.packages("packagename")
+* You can make a package available for use with library(packagename)
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="install",caption = "")`</span> Install packages: ggplot2, plyr
+
+```{r,  echo=FALSE, results="hide",eval = FALSE}
+# your code:
+install.packages("ggplot2")
+install.packages("dplyr")
+```
+
+**Note** You might have seen people using require() to load libraries. However it is better to use library(). Although they both can load an R package, require() will try to load the package using library() and return a logical value indicating the success or failure. The problem is when the library is not installed, require will signal a warning whereas library will signal an error.
+```{r error=TRUE}
+## if foo librry is not installed 
+require('foo')
+library("foo")
+```
+
+### Get help 
+
+R, and every package, provide help files for functions. To search for help on a function from a specific function that is in a package loaded into your namespace (your interactive R session):
+
+```{r}
+?vector()
+help(vector)
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="help",caption = "")`</span> What should you do when you do not remember the function name exactly?
+
+```{r}
+??log
+```
+
+## Data Types and data structures 
+
+To make the best of the R language, youll need a strong understanding of the basic data types and data structures and how to operate on those.
+
+Very important to understand because these are the objects you will manipulate on a day-to-day basis in R. Dealing with object conversions is one of the most common sources of frustration for beginners.
+
+Everything in R is an object.
+
+R has 6 atomic (data of a single type) vector types.
+
+* character: "a", "swc"
+* numeric: 2, 15.5
+* integer: 2L (the L tells R to store this as an integer)
+* logical: TRUE, FALSE
+* complex: 1+4i (complex numbers with real and imaginary parts)
+
+R has many data structures. These include:
+
+* atomic vector
+* list
+* matrix
+* data frame
+* factors
+
+R provides many functions to examine features of vectors and other objects, for example
+
+* class() - what kind of object is it (high-level)?
+* typeof() - what is the objects data type (low-level)?
+* length() - how long is it? What about two dimensional objects?
+* attributes() - does it have any metadata?
+
+```{r}
+# Example
+x <- "dataset"
+y <- data.frame(A=c(555.55,444),B=c(4,5)) 
+z <- as.integer(555.55)
+```
+
+
+### Vectors
+
+A vector is a collection of elements that are most commonly of mode character, logical, integer or numeric.
+
+#### Create vectors
+
+ You can create an empty vector with vector(). (By default the mode is logical. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as character(), numeric(), etc.
+
+```{r}
+vector() # an empty 'logical' (the default) vector
+vector("character", length = 5) # a vector of mode 'character' with 5 elements
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="create vector",caption = "")`</span> Create a  numeric vector with 5 element using constructor directly. 
+
+```{r,  echo=FALSE, results="hide"}
+numeric(5)   
+
+```
+
+You can also create vectors by directly specifying their content. R will then guess the appropriate mode of storage for the vector. For instance:
+
+```{r}
+x <- c(1, 2, 3)
+```
+
+This will create a vector x of mode numeric. These are the most common kind, and are treated as double precision real numbers. If you wanted to explicitly create integers, you need to add an L to each element (or coerce to the integer type using as.integer()).
+
+```{r}
+x1 <- c(1L, 2L, 3L)
+x1
+```
+
+Using TRUE and FALSE will create a vector of mode logical and using quoted text will create a vector of mode character.
+```{r}
+z <- c("Sarah", "Tracy", "Jon") 
+```
+
+#### Examining Vectors
+The functions typeof(), length(), class() and str() provide useful information about your vectors and R objects in general.
+
+```{r}
+typeof(z)
+length(z)
+class(z)
+```
+
+#### Adding Elements
+
+The function c() (for combine) can also be used to add elements to a vector. 
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="add element",caption = "")`</span> Add name "Annette" to vector z.
+
+```{r,  echo=FALSE, results="hide"}
+z <- c(z, "Annette")
+z
+```
+
+#### Vectors from a Sequence of Numbers
+
+You can create vectors as a sequence of numbers.
+```{r}
+series <- 1:10
+series
+seq(10)
+seq(from = 1, to = 10, by = 0.1)
+```
+
+#### Naming a vector 
+
+You can give a name to the elements of a vector with the names()
+```{r}
+temperature <- c(30, 29, 20, 15, 40)
+names(temperature) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+```
+
+
+#### Vector index 
+
+The values in a vector can be extracted via declaring an index or name inside a single square bracket "[]" operator. For example: 
+
+```{r}
+# first value in temperature
+temperature[1]
+temperature["Monday"]
+
+# First 3 values in temperature
+temperature[1:3]
+```
+
+Elements of vector can be called using index for multiple times
+
+```{r}
+temperature[c(1,1,1,2,2,2)]
+```
+
+
+** Note ** Unlike Python, R index starts from 1 rather than 0. Also the square bracket operator returns another vector rather than just individual members. temperature[1] returned a vector slice containing a single member.
+
+
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index",caption = "")` Extract values for Wednesday and Friday.
+```{r,  echo=FALSE, results="hide"}
+temperature[c("Wednesday","Friday")]
+#or 
+temperature[c(3,5)]
+``` 
+
+If the index is negative, it would remove the member whose position has the same absolute value as the negative index. For example, the following creates a vector slice with the third member removed.
+
+```{r}
+temperature[-1]
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index outofrange",caption = "")`</span>  Find out what would happen if an index is out-of-range.
+
+```{r,  echo=FALSE, results="hide"}
+temperature[10] 
+``` 
+
+**Note** R will not through a warning or error for index out-of-range! 
+
+#### Missing Data
+
+R supports missing data in vectors. They are represented as NA (Not Available) and can be used for all the vector types :
+```{r}
+x <- c(0.5, NA, 0.7)
+x <- c(TRUE, FALSE, NA)
+```
+
+The function is.na() indicates the elements of the vectors that represent missing data, and the function anyNA() returns TRUE if the vector contains any missing values:
+
+```{r}
+is.na(x)
+anyNA(x)
+```
+
+#### Other Special Values
+Inf is infinity. You can have either positive or negative infinity.
+```{r}
+1/0
+0/0
+```
+
+NaN means Not a Number. Its an undefined value. NaN is NA, whereas NA is not NaN
+
+#### Coercion
+
+What Happens When You Mix Types Inside a Vector? R will create a resulting vector with a mode that can most easily accommodate all the elements it contains. This conversion between modes of storage is called coercion. When R converts the mode of storage based on its content, it is referred to as implicit coercion. 
+
+can you guess what the following do (without running them first)?
+```{r}
+x <- c(1.7, "a")
+y <- c(TRUE, 2)
+z <- c("a", TRUE)
+
+```
+
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="max temperature",caption = "")`</span>  Here I created a vector for average temperature in Melbourne for each month. Find out which month has the maximum temperature.
+
+```{r}
+temperature=c(	21,	21,	19,	17, 14, 11, 10, 11,	13,	15,	17,	19)
+names(temperature)<-month.abb
+temperature
+```
+
+
+```{r,  echo=FALSE, results="hide"}
+temperature[which.max(temperature)]
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="temperature difference",caption = "")`</span>  Find out the temperature difference between the month with maximum temperature and the month with minimum temperature.
+
+```{r,  echo=FALSE, results="hide"}
+# your code:
+temperature[[which.max(temperature)]]- temperature[[which.min(temperature)]]
+```
+
+
+### Factors
+
+Another important data structure is called a factor. Factors usually look like character data, but are typically used to represent categorical information. For example, let's create a factor variable ses:
+
+```{r }
+# create ses variable
+ses <- c("low", "middle", "low", "high", "low", "low", "low", "middle", "low",
+  "middle", "middle", "middle", "middle", "middle")
+ses.f<-factor(ses)
+# check levels
+levels(ses.f)
+```
+
+The problem is that the levels are ordered according to the alphabetical order of the categories of ses. Thus, "high" is the lowest level of ses.f, "low" is the middle level and "middle" is the highest level. In order to fix the ordering we need to use the levels argument to indicate the correct ordering of the categories. Let's create ses.f with the correct order of categories.
+
+```{r}
+ses.f <- factor(ses, levels = c("middle","low", "high"))
+ses.f
+levels(ses.f)
+# or
+ses.f <-factor(ses.f,levels(ses.f)[c(2,1,3)])
+ses.f
+levels(ses.f)
+```
+
+We can also generate factor variable from numeric data by specifing labels using the labels argument. 
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="factor label",caption = "")`</span>  Crate a factor variable for type as type.f and label 0 as "private" and 1 as "public".
+
+```{r}
+# from a numaric vector
+type<-c(1,0,0,0,1,1,0,1)
+
+# your code: 
+type.f<-factor(type, labels=c("private", "public"))
+type.f
+
+```
+
+However you have to be careful with converting numeric variables to factor variables . See the following example: 
+
+```{r}
+type.f<-factor(type, levels=c("1","0"), labels=c("private", "public"))
+type.f
+```
+
+The levels argument determines the categories of the factor variable, and the default is the sorted list of all the distinct values of the data vector. This is particular useful as the order of levels is quite important in many analyses such as linear regression and generalised linear models. The lowest level will be automatically set as the reference category. The labels argument states a vector of values that will be the labels of the categories in the levels argument. You have to remember that the levels argument and labels argument should be matching.
+
+
+#### R factor variable vs Stata categorical variable 
+
+R factor variable is similar but different from Stata categorical variable. Factor variable in R is evaluated/compared/operated the same as character/string variable rather than numeric variable. 
+
+```{r}
+factor_to_numeric = c(10,20,20,50,10,20,10,50,20)
+factor_to_numeric = factor(factor_to_numeric,levels=c(10,20,50))
+factor_to_numeric=="20"
+```
+
+as.numeric function can return the underlying integer values of the factor. However the conversion from factor level to numeric have to be done using the levels attribute of the factor or forcing the data to character variable first.
+```{r}
+mean(as.numeric(factor_to_numeric))
+mean(as.numeric(levels(factor_to_numeric)[factor_to_numeric]))
+mean(as.numeric(as.character(factor_to_numeric)))
+```
+#### Ordered factor
+
+Ordered factor variables can be created by using the function ordered. This function has the same arguments as the factor function. To create an ordered factor variable called ses.order based on the variable ses.
+
+```{r}
+ses.order <- ordered(ses, levels = c("low", "middle", "high"))
+```
+
+<span style="color:Red;font-weight: bold;font-size:1.2em "> Discussion </span>: What is the difference between ordered factorr variables and factor variables 
+
+**Note** ordered factor variables and factor variables may look similar. However it can be crucial for some of analysis. As linear regression for example, if a predictor is a factor variable, R will create dummy variables for each levels of the variable (excluding the baseline level). If a predictor is an ordered factor variable, R will create orthogonal polynomial coding for each level of the variable, then the variable will be treated as a continious variable. 
+
+
+#### Adding and dropping levels 
+
+Below we will add an element from a new level ("very.high") to ses.f our existing factor variable, ses.f. The number in the square brackets ( [21] ) indicates the number of the element whose label we wish to change.
+
+```{r}
+ses.f[15] <- "very.high"
+```
+
+The problme is that instead of changing from "high" to "very.high", the label was changed from "high" to <NA>. 
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="add new level",caption = "")`</span>  Complete this task correctly (hint: you need to first add the new level, "very.high", to the factor variable ses.f)
+
+```{r,  echo=FALSE, results="hide"}
+ses.f <- factor(ses.f, levels = c(levels(ses.f), "very.high"))
+ses.f[15] <- "very.high"
+ses.f
+```
+
+Dropping a level of a factor variable is a little easier. The simplest way is to first remove all the elements within the level to be removed and then to redeclare the variable to be a factor variable. Let's illustrate this by removing the level of "very.high" from the ses.f variable.
+
+```{r}
+ses.f.new <- ses.f[ses.f != "very.high"]
+table(ses.f.new)
+ses.f.new <- factor(ses.f.new)
+table(ses.f.new)
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="drop level",caption = "")`</span>  Drop the level very.high via converting very.high to NA. 
+```{r,  echo=FALSE, results="hide"}
+levels(ses.f)[levels(ses.f)=='very.high'] <- NA
+
+```
+
+### Matrix
+
+In R matrices are an extension of the numeric or character vectors. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns.
+
+```{r}
+m <- matrix(1:6, nrow = 2, ncol = 2)
+m
+dim(m)
+typeof(m)
+class(m)
+```
+
+Matrices in R are filled column-wise.You can also fill data by row with argument byrow. Another way is to bind vectors using cbind() and rbind(). 
+
+<span style="color:Red;font-weight: bold;font-size:1.2em "> Discussion </span>: What do you think will be the result of length(matrix_example)? Try it. Were you right? Why / why not?
+```{r}
+matrix_example <- matrix(0, ncol=6, nrow=3)
+length(matrix_example)
+```
+
+**Note** Because a matrix is a vector with added dimension attributes, length gives you the total number of elements in the matrix.
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="find matrix",caption = "")`</span>  Consider the R output of the matrix below:
+
+     [,1] [,2]
+[1,]    4    1
+[2,]    9    5
+[3,]   10    7
+
+What was the correct command used to write this matrix? Examine each command and try to figure out the correct one before typing them. Think about what matrices the other commands will produce
+
+1. matrix(c(4, 1, 9, 5, 10, 7), nrow = 3)
+2. matrix(c(4, 9, 10, 1, 5, 7), ncol = 2, byrow = TRUE)
+3. matrix(c(4, 9, 10, 1, 5, 7), nrow = 3)
+4. matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)
+
+```{r,  echo=FALSE, results="hide"}
+matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)
+matrix(c(4, 9, 10, 1, 5, 7), nrow = 3)
+```
+
+cbind() and rbind() can be used to combine vectors to matrix. However, be careful that vectors can be recycled when combining.  
+ 
+```{r}
+x <- 1:3
+y <- 10:12
+z <- 1:6
+
+```
+
+```{r,  echo=FALSE, results="hide"}
+cbind(x, y)
+rbind(x, y)
+cbind(x,z)
+rbind(x,z)
+```
+
+### List
+
+In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called generic vectors, because the elements of a list can by of any type of R object, even lists containing further lists. This property makes them fundamentally different from atomic vectors.
+
+A list is a special type of vector. Each element can be a different type.
+
+Create lists using list() or coerce other objects using as.list(). 
+
+```{r}
+x <- list(1, "a", TRUE, 1+4i)
+x
+x <- 1:10
+x <- as.list(x)
+x
+```
+
+
+Elements of lists can have names. 
+```{r}
+xlist <- list(a = "Karthik Ram", b = 1:10, data = head(iris))
+xlist
+```
+
+<span style="color:Red;font-weight: bold;font-size:1.2em "> Discussion </span>:  What is the length of this object? What about its structure?
+```{r}
+length(xlist)
+str(xlist)
+```
+
+You can extract an element of a list using $ operator with the element's name.
+
+```{r}
+xlist$b
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="list index",caption = "")`</span> What is the class of xlist[2]? What about xlist[[2]] and xlist$b ?
+
+```{r,  echo=FALSE, results="hide"}
+class(xlist[2])
+class(xlist[[2]])
+class(xlist$b)
+```
+
+* The [ operator always returns an object of the same class as the original. It can be used to
+select multiple elements of an object
+* The [[ operator is used to extract elements of a list or a data frame. It can only be used to
+extract a single element and the class of the returned object will not necessarily be a list or
+data frame.
+* The $ operator is used to extract elements of a list or data frame by literal name. Its semantics
+are similar to that of [[.
+
+Lists can be extremely useful inside functions. You can “staple” together lots of different kinds of results into a single object that a function can return.
+
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="list index2",caption = "")`</span>  I have three student's results from two exams (both worth 50% of the total score) stored in an list "exam". I have also caculated whether they passed the subject or not. Find out if I caculated any one incorrectly. 
+```{r}
+exam<-list(name=c("Caroline","Tyler", "David"),exam1=c(50,99,80),exam2=c(40,NA,100), Passed=c("N","Y","Y"))
+exam
+```
+
+```{r,  echo=FALSE, results="hide"}
+exam$exam2[is.na(exam$exam2)]<-0
+exam$name[ifelse(exam$exam1*0.5+exam$exam2*0.5>=50,"Y","N")!=exam$Passed]
+```
+
+
+### Data Frame
+A data frame is a very important data type in R. Its pretty much the de facto data structure for most tabular data and what we use for statistics.
+
+Data frames can have additional attributes such as rownames(), which can be useful for annotating data, like subject_id or sample_id. But most of the time they are not used.
+
+Some additional information on data frames:
+* Can convert to matrix with data.matrix() (preferred) or as.matrix()
+* Coercion will be forced and not always what you expect.
+* Can also create with data.frame() function.
+* Find the number of rows and columns with nrow(dat) and ncol(dat), respectively.
+* Rownames are usually 1, 2, …, n.
+
+To create data frames by hand:
+```{r}
+dat <- data.frame(id = letters[1:10], x = 1:10, y = 11:20)
+dat
+```
+
+Useful Data Frame Functions
+* head() - shown first 6 rows
+* tail() - show last 6 rows
+* dim() - returns the dimensions
+* nrow() - number of rows
+* ncol() - number of columns
+* str() - structure of each column
+* names() - shows the names attribute for a data frame, which gives the column names.
+
+We will use the iris dataset here (https://en.wikipedia.org/wiki/Iris_flower_data_set).
+
+
+#### Data frame index
+
+A data frame, much like a matrix, has two dimensions – rows and columns. To index a data frame (or a matrix), we use brackets in R next to the object, like so:
+
+iris[i, j]
+
+Where “i” denotes the rows that you want and “j” is the columns. 
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index data frame",caption = "")`</span> :Extract the first 10 rows of the iris dataset. 
+```{r,  echo=FALSE, results="hide"}
+iris[1:10,]
+```
+
+We can also extract individual columns of a data frame with the “$” operator using column name. 
+```{r}
+iris$Species
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index data frame 2",caption = "")`</span> Find out how many rows of data in iris dataset where Species is setosa.
+
+```{r,  echo=FALSE, results="hide"}
+nrow(iris[iris$Species=="setosa",])
+# or
+nrow(subset(iris,Species=="setosa"))
+```
+
+#### Adding columns and rows in dataframe
+
+We learned that the columns in a data frame were vectors, so that our data are consistent in type throughout the column. As such, if we want to add a new column, we need to start by making a new vector:
+```{r }
+
+iris$year<-1936
+```
+
+
+#### Read data
+
+To read a csv file, you can use read.csv() and read.table() function from your local computer. Files can also be downloaded directly from the Internet into a local folder of your choice onto your computer using the download.file function. The read.csv function can then be executed to read the downloaded file from the download location, for example,
+```{r,  echo=FALSE, results="hide"}
+# download.file("https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder-FiveYearData.csv", destfile = "data/gapminder-FiveYearData.csv")
+
+gapminder <- read.csv("gapminder-FiveYearData.csv")
+```
+
+Alternatively, you can also read in files directly into R from the Internet via specifying web address in read.csv. One should note that in doing this no local copy of the csv file is first saved onto your computer. For example,
+
+```{r}
+gapminder <- read.csv("https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder-FiveYearData.csv")
+```
+
+Another type of file you might encounter are tab-separated value files (.tsv). To specify a tab as a separator, use "\\t" or read.delim(). You can read directly from excel spreadsheets without converting them to plain text first by using the [readxl](https://cran.r-project.org/web/packages/readxl/index.html) package.
+
+#### Investigate data frame
+
+The first thing we always do is check out what the data looks like. This can be easily done with str:
+```{r}
+str(gapminder)
+```
+
+<span style="color:Red;font-weight: bold;font-size:1.2em "> Discussion </span>: Remembering that str(gapminder) said there were 1704 observations of 6 variables in gapminder, what is the length of the gapminder dataset, and why?
+
+```{r}
+length(gapminder)
+```
+** Note** A data frame is a list of vectors and factors, so length() returned number of elements (columns) in the the list.
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="gapminder low lifeExp",caption = "")`</span> Extract names of countries which have life expectancy below 40s before 1980 (with one line of code).
+
+```{r,  echo=FALSE, results="hide"}
+unique(gapminder[gapminder$year<1980 & gapminder$lifeExp<40,"country"])
+```
+
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="increasing lifeExp",caption = "")`</span> Extract names of countries with increasing life expectancy only (with one line of code).
+
+```{r,  echo=FALSE, results="hide"}
+unique(gapminder$country)[as.vector(by(gapminder$lifeExp,gapminder$country,function(x) all(x == cummax(x))))]
+```
+
+
+
+
+## Key Points
+
+* Use RStudio to write and run R programs.
+* R arithmetic operators.
+* Use <- to assign values to variables.
+* Use ls() to list the variables in a program.
+* Use rm() to delete objects in a program. 
+* Use install.packages() to install packages (libraries).
+* Rs basic data types are character, numeric, integer, complex, and logical.
+* Rs basic data structure -  vector
+* Coercion
+* Rs basic data structure
+    + factors
+    + matrixs
+    + lists
+    + data frame
+* obtain attributes of objects 
+* use cbind() and rbind() to add a new row to a data frame.
+* Remove rows from a data frame.
+* Use str(), nrow(), ncol(), dim(), colnames(), rownames(), head() and typeof() to understand structure of the data frame
+* Read in a csv file using read.csv()
+
+
+## Additional material 
+
+
+### Video lectures
+
+Lecture videos in week one from [R Programming](https://www.coursera.org/learn/r-programming) on Coursera:  
+
+* Introduction
+* Overview and History of R
+* Getting Help
+* R Console Input and Evaluation
+* Data Types - R Objects and Attributes
+* Data Types - Vectors and Lists
+* Data Types - Matrices
+* Data Types - Missing Values
+* Data Types - Factors
+* Data Types - Data Frames
+* Data Types - Names Attribute
+* Data Types - Summary
+* Textual Data Formats (optional)
+* Connections: Interfaces to the Outside World
+* Subsetting - Basics
+* Subsetting - Matrices
+* Subsetting - Lists
+* Subsetting - Partial Matching
+* Subsetting - Removing Missing Values
+* Reading Tabular Data
+* Reading Large Tables
+* Vectorized Operations
+
+### Reading
+
+*	Chapter 3- 5: R Programming for Data Science by Roger D. Peng (http://leanpub.com/rprogramming)
+
+*	Wilson G, Aruliah DA, Brown CT, Chue Hong NP, Davis M, Guy RT, et al. (2014) Best Practices for Scientific Computing. PLoS Biol 12(1): e1001745. doi:10.1371/journal.pbio.1001745 (http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745) 
+
+
+
+### swill package
+
+In the R programming course the swirl software package for R was used for further practice. The swirl package turns the R console into an interactive learning environment.You are encouraged to practice your R skills with Programming course on swirl.
+
+To do this you have to 
+
+1. Install swirl
+```{r,eval=FALSE}
+install.packages("swirl")
+```
+
+If you've installed swirl in the past make sure you have version 2.2.21 or later. You can check this with:
+
+2. Load swirl
+
+Every time you want to use swirl, you need to first load the package. From the R console:
+```{r, eval=FALSE}
+library(swirl)
+```
+
+3. Install the R Programming course
+
+swirl offers a variety of interactive courses, but for our purposes, you want the one called R Programming. Type the following from the R prompt to install this course:
+```{r, eval=FALSE}
+install_from_swirl("R Programming")
+```
+
+4. Start swirl and complete the lessons
+
+Type the following from the R console to start swirl:
+
+```{r, eval=FALSE}
+swirl()
+
+```
+
+Then, follow the menus and select the R Programming course when given the option. For this week you should complete the following lessons:
+
+* Basic Building Blocks
+* Work space and Files
+* Sequences of Numbers
+* Vectors
+* Missing Values
+* Subsetting Vectors
+* Matrices and Data Frames 
+
+
