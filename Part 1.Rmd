@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R -  Week 1"
+title: "Part 1 Introduction to R"
 author: "By Caroline Gao"
 
 output:
@@ -101,7 +101,6 @@ Also
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="integer division",caption = "")`</span> Should 1 %/% 0.2 be 4 or 5? 
 ```{r,  echo=FALSE, results="hide"}
-# your code: 
 1 %/% 0.2 
 ```
 
@@ -236,7 +235,7 @@ help(vector)
 ??log
 ```
 
-## Data Types and data structures 
+## Data types and data structures 
 
 To make the best of the R language, youll need a strong understanding of the basic data types and data structures and how to operate on those.
 
@@ -313,7 +312,7 @@ Using TRUE and FALSE will create a vector of mode logical and using quoted text 
 z <- c("Sarah", "Tracy", "Jon") 
 ```
 
-#### Examining Vectors
+#### Examining vectors
 The functions typeof(), length(), class() and str() provide useful information about your vectors and R objects in general.
 
 ```{r}
@@ -322,7 +321,7 @@ length(z)
 class(z)
 ```
 
-#### Adding Elements
+#### Adding elements
 
 The function c() (for combine) can also be used to add elements to a vector. 
 
@@ -333,7 +332,7 @@ z <- c(z, "Annette")
 z
 ```
 
-#### Vectors from a Sequence of Numbers
+#### Vectors from a sequence of numbers
 
 You can create vectors as a sequence of numbers.
 ```{r}
@@ -397,7 +396,7 @@ temperature[10]
 
 **Note** R will not through a warning or error for index out-of-range! 
 
-#### Missing Data
+#### Missing data
 
 R supports missing data in vectors. They are represented as NA (Not Available) and can be used for all the vector types :
 ```{r}
@@ -412,7 +411,7 @@ is.na(x)
 anyNA(x)
 ```
 
-#### Other Special Values
+#### Other special values
 Inf is infinity. You can have either positive or negative infinity.
 ```{r}
 1/0
@@ -437,7 +436,7 @@ z <- c("a", TRUE)
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="max temperature",caption = "")`</span>  Here I created a vector for average temperature in Melbourne for each month. Find out which month has the maximum temperature.
 
 ```{r}
-temperature=c(	21,	21,	19,	17, 14, 11, 10, 11,	13,	15,	17,	19)
+temperature=c(	21,	21,	19,	17, 14, 11,10, 11,	13,	15,	17,	19)
 names(temperature)<-month.abb
 temperature
 ```
@@ -460,45 +459,47 @@ temperature[[which.max(temperature)]]- temperature[[which.min(temperature)]]
 Another important data structure is called a factor. Factors usually look like character data, but are typically used to represent categorical information. For example, let's create a factor variable ses:
 
 ```{r }
-# create ses variable
-ses <- c("low", "middle", "low", "high", "low", "low", "low", "middle", "low",
-  "middle", "middle", "middle", "middle", "middle")
-ses.f<-factor(ses)
+# create temp_level variable
+temp_level <- c( "high", "high" ,"middle" ,"middle" ,"low", "low","low", "low", "low", "low", "middle" ,"middle") 
+temp_level.f<-factor(temp_level) 
 # check levels
-levels(ses.f)
+levels(temp_level.f)
 ```
 
 The problem is that the levels are ordered according to the alphabetical order of the categories of ses. Thus, "high" is the lowest level of ses.f, "low" is the middle level and "middle" is the highest level. In order to fix the ordering we need to use the levels argument to indicate the correct ordering of the categories. Let's create ses.f with the correct order of categories.
 
 ```{r}
-ses.f <- factor(ses, levels = c("middle","low", "high"))
-ses.f
-levels(ses.f)
+temp_level.f <- factor(temp_level, levels = c("middle","low", "high"))
+temp_level.f
+levels(temp_level.f)
 # or
-ses.f <-factor(ses.f,levels(ses.f)[c(2,1,3)])
-ses.f
-levels(ses.f)
+temp_level.f <-factor(temp_level.f,levels(temp_level.f)[c(2,1,3)])
+temp_level.f
+levels(temp_level.f)
 ```
 
-We can also generate factor variable from numeric data by specifing labels using the labels argument. 
+We can also generate factor variable from numeric data by specifing labels using the labels argument or using the cut function 
 
-<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="factor label",caption = "")`</span>  Crate a factor variable for type as type.f and label 0 as "private" and 1 as "public".
+
 
 ```{r}
 # from a numaric vector
-type<-c(1,0,0,0,1,1,0,1)
+temp_num <- c( 3,3,2,2,1,1,1,1,1,1,2,2) 
+temp_num.f<-factor(temp_num, labels=c("low","middle", "high"))
+temp_num.f
 
-# your code: 
-type.f<-factor(type, labels=c("private", "public"))
-type.f
+temp_num.f <- cut(temperature,breaks=c(0,15,20,25),labels=c("low","middle", "high")) 
+temp_num.f
+
 
 ```
 
 However you have to be careful with converting numeric variables to factor variables . See the following example: 
 
 ```{r}
-type.f<-factor(type, levels=c("1","0"), labels=c("private", "public"))
-type.f
+# wrong orde of the levels defined
+temp_num.f<-factor(temp_num, levels=c(3,2,1), labels=c("low","middle", "high"))
+temp_num.f
 ```
 
 The levels argument determines the categories of the factor variable, and the default is the sorted list of all the distinct values of the data vector. This is particular useful as the order of levels is quite important in many analyses such as linear regression and generalised linear models. The lowest level will be automatically set as the reference category. The labels argument states a vector of values that will be the labels of the categories in the levels argument. You have to remember that the levels argument and labels argument should be matching.
@@ -509,23 +510,24 @@ The levels argument determines the categories of the factor variable, and the de
 R factor variable is similar but different from Stata categorical variable. Factor variable in R is evaluated/compared/operated the same as character/string variable rather than numeric variable. 
 
 ```{r}
-factor_to_numeric = c(10,20,20,50,10,20,10,50,20)
-factor_to_numeric = factor(factor_to_numeric,levels=c(10,20,50))
-factor_to_numeric=="20"
+
+temperature = factor(temperature)
+temperature
+temperature=="21"
 ```
 
 as.numeric function can return the underlying integer values of the factor. However the conversion from factor level to numeric have to be done using the levels attribute of the factor or forcing the data to character variable first.
 ```{r}
-mean(as.numeric(factor_to_numeric))
-mean(as.numeric(levels(factor_to_numeric)[factor_to_numeric]))
-mean(as.numeric(as.character(factor_to_numeric)))
+mean(as.numeric(temperature))
+mean(as.numeric(levels(temperature)[temperature]))
+mean(as.numeric(as.character(temperature)))
 ```
 #### Ordered factor
 
 Ordered factor variables can be created by using the function ordered. This function has the same arguments as the factor function. To create an ordered factor variable called ses.order based on the variable ses.
 
 ```{r}
-ses.order <- ordered(ses, levels = c("low", "middle", "high"))
+temp_level.order <- ordered(temp_level, levels = c("low", "middle", "high"))
 ```
 
 <span style="color:Red;font-weight: bold;font-size:1.2em "> Discussion </span>: What is the difference between ordered factorr variables and factor variables 
@@ -535,10 +537,10 @@ ses.order <- ordered(ses, levels = c("low", "middle", "high"))
 
 #### Adding and dropping levels 
 
-Below we will add an element from a new level ("very.high") to ses.f our existing factor variable, ses.f. The number in the square brackets ( [21] ) indicates the number of the element whose label we wish to change.
+Below we will add an element from a new level ("very.high") to ses.f our existing factor variable, temp_level.f.  The number in the square brackets ( [] ) indicates the number of the element whose label we wish to change.
 
 ```{r}
-ses.f[15] <- "very.high"
+temp_level.f[13] <- "very.high"
 ```
 
 The problme is that instead of changing from "high" to "very.high", the label was changed from "high" to <NA>. 
@@ -546,24 +548,24 @@ The problme is that instead of changing from "high" to "very.high", the label wa
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="add new level",caption = "")`</span>  Complete this task correctly (hint: you need to first add the new level, "very.high", to the factor variable ses.f)
 
 ```{r,  echo=FALSE, results="hide"}
-ses.f <- factor(ses.f, levels = c(levels(ses.f), "very.high"))
-ses.f[15] <- "very.high"
-ses.f
+temp_level.f <- factor(temp_level.f, levels = c(levels(temp_level.f), "very.high"))
+temp_level.f[13] <- "very.high"
+temp_level.f
 ```
 
 Dropping a level of a factor variable is a little easier. The simplest way is to first remove all the elements within the level to be removed and then to redeclare the variable to be a factor variable. Let's illustrate this by removing the level of "very.high" from the ses.f variable.
 
 ```{r}
-ses.f.new <- ses.f[ses.f != "very.high"]
-table(ses.f.new)
-ses.f.new <- factor(ses.f.new)
-table(ses.f.new)
+temp_level.f.new <- temp_level.f[temp_level.f != "very.high"]
+table(temp_level.f.new)
+temp_level.f.new <- factor(temp_level.f.new)
+table(temp_level.f.new)
 ```
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="drop level",caption = "")`</span>  Drop the level very.high via converting very.high to NA. 
 ```{r,  echo=FALSE, results="hide"}
-levels(ses.f)[levels(ses.f)=='very.high'] <- NA
-
+levels(temp_level.f)[levels(temp_level.f)=='very.high'] <- NA
+table(temp_level.f)
 ```
 
 ### Matrix
@@ -689,7 +691,8 @@ exam$name[ifelse(exam$exam1*0.5+exam$exam2*0.5>=50,"Y","N")!=exam$Passed]
 ```
 
 
-### Data Frame
+### Data frame
+
 A data frame is a very important data type in R. Its pretty much the de facto data structure for most tabular data and what we use for statistics.
 
 Data frames can have additional attributes such as rownames(), which can be useful for annotating data, like subject_id or sample_id. But most of the time they are not used.
@@ -721,18 +724,18 @@ We will use the iris dataset here (https://en.wikipedia.org/wiki/Iris_flower_dat
 
 #### Data frame index
 
-A data frame, much like a matrix, has two dimensions – rows and columns. To index a data frame (or a matrix), we use brackets in R next to the object, like so:
+A data frame, much like a matrix, has two dimensions  rows and columns. To index a data frame (or a matrix), we use brackets in R next to the object, like so:
 
 iris[i, j]
 
-Where “i” denotes the rows that you want and “j” is the columns. 
+Where i denotes the rows that you want and j is the columns. 
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index data frame",caption = "")`</span> :Extract the first 10 rows of the iris dataset. 
 ```{r,  echo=FALSE, results="hide"}
 iris[1:10,]
 ```
 
-We can also extract individual columns of a data frame with the “$” operator using column name. 
+We can also extract individual columns of a data frame with the $ operator using column name. 
 ```{r}
 iris$Species
 ```
@@ -749,8 +752,8 @@ nrow(subset(iris,Species=="setosa"))
 
 We learned that the columns in a data frame were vectors, so that our data are consistent in type throughout the column. As such, if we want to add a new column, we need to start by making a new vector:
 ```{r }
-
 iris$year<-1936
+head(iris)
 ```
 
 
