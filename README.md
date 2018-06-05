@@ -3,7 +3,7 @@
 
 The following materials are developed for training SPHPM staff members with R skills. The materials include: 
 * Part 1 -  Introduction to R 
-* Part 2 - R Programming essentials
+* Part 2 - R programming essentials
 * Part 3 - Analysis and reporting
 * Part 4 - Data manipulation using dplyr & tidyr
 * Part 5 - Data visualisation using ggplot2 
