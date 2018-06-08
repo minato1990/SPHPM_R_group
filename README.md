@@ -8,7 +8,7 @@ The following materials are developed for training SPHPM staff members with R sk
 * Part 4 - Data manipulation using dplyr & tidyr
 * Part 5 - Data visualisation using ggplot2 
 
-To start will, you have to install R and R studio if you do have them on your computer. 
+To start will, you have to install R and R studio if you do have not them on your computer. 
 
 Install R on Mac
 https://www.coursera.org/learn/r-programming/lecture/9Aepc/installing-r-on-a-mac
