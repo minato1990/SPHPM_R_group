@@ -49,7 +49,7 @@ STATA v.s.R
 ========================================================
 
 <div class="footer" style="margin-top:-150px;font-size:100%;" align="left">
-R may not be your most prefered tool to start with. However the more you use it, the more likely you are going to use it.</div>
+R may not be your most preferred tool to start with. However the more you use it, the more likely you are going to use it.</div>
 
 <br />
 STATA
@@ -75,14 +75,23 @@ Reproducibility
 * <div style="color:black ;font-size: 130%"> Reproducibility</div>
 
 <div class="footer" style="margin-top:-140px;font-size:120%;" align="centre">
-Make sure every step of yor analysis is `reproducible'!</div>
+Make sure every step of yor analysis is 'reproducible'!</div>
+
+Reproducibility
+========================================================
+
+![Alt Text](http://revolution-computing.typepad.com/.a/6a010534b1db25970b01bb0794c2fc970d-800wi) 
+
+* Ignoring version control??
+* Tracking package dependencies per project using packrat or checkpoint
+
 
 Reproducibility
 ========================================================
 Project management 
 * Keep source data in zip file
 * Store all data and analyses code on netdrive 
-* Dcumentation
+* Documentations
 * ...
 
 Related to R
@@ -91,13 +100,6 @@ Related to R
 * Git version control
 * ...
 
-Reproducibility
-========================================================
-
-![Alt Text](http://revolution-computing.typepad.com/.a/6a010534b1db25970b01bb0794c2fc970d-800wi) 
-
-* Ignoring reproducibility??
-* Tracking package dependencies per project
 
 
 Reproducibility/Reusability
@@ -136,24 +138,21 @@ My code now:
 ```r
 #Extract median, range and max PM2.5 for each SA2 areas
 fire_area<-Ambo_timeseries %>%
-    #exclude data during industrial action
     select(SA2_NAME11,All, pop, Date) %>% 
+    #exclude data during industrial action
     na.omit() %>%
-    #add full condition names
+    #calculate rates
     mutate(rate=All*10000/pop) %>% 
-    dplyr::select(SA2_NAME11, Date,  rate ) %>% 
-    #fill 0 for those SA2 without any record for a condtion 
+    #obtain median and interquartile range by SA2 name
     group_by(SA2_NAME11) %>% 
     summarise(Median=format(round(quantile(rate, probs=0.5),1), nsmall=1),
-              "Interquartile range"= paste0(format(round(quantile(rate, probs=0.25),1),nsmall=1),"-" , format(round(quantile(rate, probs=0.75),1),nsmall=1)),
-              "Median "=format(round(quantile(rate[Date>=Start_date& Date<=End_date], probs=0.5),1), nsmall=1) ,
-              "Interquartile range "= paste0(format(round(quantile(rate[Date>=Start_date& Date<=End_date], probs=0.25),1),nsmall=1),"-" , format(round(quantile(rate, probs=0.75),1),nsmall=1)))
+              "Interquartile range"= paste0(format(round(quantile(rate, probs=0.25),1),nsmall=1),"-" , format(round(quantile(rate, probs=0.75),1),nsmall=1)))
 ```
 
 Reusability
 ========================================================
 * Always try to write 'pretty' code
-* Naming of datasets and variables 
+* Think about naming of datasets and variables 
 * Try to write functions for repetitive work
 
 Efficiency
@@ -172,7 +171,10 @@ Efficiency
 
 House keeping
 ========================================================
-
+* Install R and Rstudio
+* Install package: knit,ggplot2, dplyr, tidyr
+* Download Github study material from: https://github.com/CarolineXGao/SPHPM_R_group (use the Clone or download button).
+* There are some additional study materials provided in Part 1 (coursea video lectures, swirl etc) feel free to get started before next week
 
 
 
