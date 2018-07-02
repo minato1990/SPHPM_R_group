@@ -67,10 +67,19 @@ ls("package:datasets")
 ```
 
 
+Built-in package: mtcars
+========================================================
+class:small-code
+```{r, echo = F}
+mtcars
+```
+
+
 Pretty graphs
 ========================================================
 class: small-code
-```{r my plot, fig.width = 15, fig.height = 6}
+<div align = "center">
+```{r my plot, fig.width = 15, fig.height = 5}
 # load necessary package
 library(ggplot2) 
 # convert target variable to factor with meaningful labels
@@ -85,6 +94,20 @@ ggplot(mtcars, aes(x = mpg, fill = Transmission)) +
 ```
 
 
+
+Testing transmission/fuel with simple code
+========================================================
+class: small-code
+```{r}
+# Is fuel efficiency normally distributed?
+shapiro.test(mtcars # function for normal test(data.frame
+             $mpg) # variable, denoted with '$'
+```
+
+```{r}
+# Not normally distributed; need nonparametric test (Mann-Whitney U)
+wilcox.test(mtcars$mpg ~ mtcars$am)
+```
 
 
 
@@ -107,13 +130,14 @@ My unsolicited advice
 
 
 
-Reproducibility
+Key points we'll talk about today
 ========================================================
-
+* Reproducibility
+* Readability/reusability
+* Version control
+  - Tracking package dependencies per project using packrat or checkpoint
 ![Alt Text](http://revolution-computing.typepad.com/.a/6a010534b1db25970b01bb0794c2fc970d-800wi) 
 
-* Ignoring version control??
-* Tracking package dependencies per project using packrat or checkpoint
 
 
 Reproducibility
@@ -135,7 +159,7 @@ Related to R
 Reproducibility/Reusability
 ========================================================
 class: small-code
-Caroline's code from 10 years ago: 
+Caroline's code from 10 years ago (???, like Finnegans Wake)
 ```{ r,eval=FALSE}
 particlechange<-c(50)
 for( g in 1:30)
@@ -162,8 +186,7 @@ z<-outer(x,y,f)
 Reproducibility/Reusability
 ========================================================
 class: small-code
-Caroline's code now: 
-
+Caroline's code now (clear like Hemingway)
 ```{r, eval=FALSE}
 #Extract median, range and max PM2.5 for each SA2 areas
 fire_area<-Ambo_timeseries %>%
@@ -204,14 +227,14 @@ Efficiency
 House keeping
 ========================================================
 * Install R and Rstudio
-* Install package: knit,ggplot2, dplyr, tidyr
+* Install package: knit, ggplot2, dplyr, tidyr
 * Download Github study material from: https://github.com/CarolineXGao/SPHPM_R_group (use the Clone or download button).
 * There are some additional study materials provided in Part 1 (coursea video lectures, swirl etc) feel free to get started before next week
 
 
 
 
-Happy coding
+Happy coding!
 ========================================================
 $~$
 
