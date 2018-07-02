@@ -27,55 +27,85 @@ font-family: 'Helvetica'
 ![Alt Text](https://78.media.tumblr.com/e1712952f6eb24f418a997a8da6ae831/tumblr_ou1znif6LW1w4t58uo1_500.gif)
 
    
-<div style="color:white ;text-align: right"> Tyler Lane & Caroline Gao </div>
+<div style="color:white ;text-align: right"> Caroline Gao & Tyler Lane </div>
 
 
-
-
-Road to R
+Welcome to the first SPHPM R Group Meeting!
 ========================================================
-* C/C++, FORTRAN, MATLAB, VB, R, Python, STATA, SAS, SPSS
-* C/C++, FORTRAN, MATLAB, VB, R, Python, STATA, SAS
-* C/C++, MATLAB, VB, R, Python, STATA, SAS
-* C/C++, MATLAB, R, Python, STATA, SAS
-* C/C++, R, Python, STATA, SAS
-* C/C++, R, Python, STATA
-* R, Python, STATA
-* R, STATA
+* Purpose: 
+  - Create a community of R users
+  - Provide some training
+  - Tips on best practice
+
+
+
+
+What stats packages do you currently use?
+========================================================
+* MS Excel 
+  - My main stats software when I was a statistician in the UK govt!
+* SPSS
+* STATA
+* SAS
+* Python
 * R
+* Something else?
 
 
-STATA v.s.R
+Why use R?
 ========================================================
-
-<div class="footer" style="margin-top:-150px;font-size:100%;" align="left">
-R may not be your most preferred tool to start with. However the more you use it, the more likely you are going to use it.</div>
-
-<br />
-STATA
-* Easy to start with
-* Standard applications
-* Survey analysis, Multiple Imputations...
-
-***
-<br />
-R
-* Something new 
-* Something fancy
-* something pretty
+class: small-code
+* It's free!
+  - Skill you can carry outside academia
+* Extremely flexible
+  - User-developed packages to do just about anything
+* Vibrant, passionate, and supportive user community
+* Built-in datasets to practice with
+```{r, eval = FALSE}
+# To see this, enter this code in your console
+ls("package:datasets")
+```
 
 
-Reproducibility
+Pretty graphs
 ========================================================
-* <div style="color:black ;font-size: 80% "> Reproducibility</div>
-* <div style="color:black ;font-size: 90% "> Reproducibility</div>
-* <div style="color:black ;font-size: 100%" > Reproducibility</div>
-* <div style="color:black ;font-size: 110%" > Reproducibility</div>
-* <div style="color:black ;font-size: 120%"> Reproducibility</div>
-* <div style="color:black ;font-size: 130%"> Reproducibility</div>
+class: small-code
+```{r my plot, fig.width = 15, fig.height = 6}
+# load necessary package
+library(ggplot2) 
+# convert target variable to factor with meaningful labels
+mtcars$Transmission <- factor(mtcars$am, 
+                       levels = c(0, 1), 
+                       labels = c("Automatic", "Manual"))
+# Plot
+ggplot(mtcars, aes(x = mpg, fill = Transmission)) + 
+  geom_density(alpha = 0.5) + 
+  labs(title = "Fuel efficiency by transmission type", 
+       x = "Miles per gallon", y = "Distribution") 
+```
 
-<div class="footer" style="margin-top:-140px;font-size:120%;" align="centre">
-Make sure every step of yor analysis is 'reproducible'!</div>
+
+
+
+
+Disadvantages of R
+========================================================
+* Steep learning curve
+* Less support than commercial software
+* FRUSTRATING!
+![Alt Text](https://alfahir.hu/sites/default/files/styles/szeles/public/indexfotos/2018-04/g-ucpo_0.gif?itok=zwB7bbTC)
+
+
+
+My unsolicited advice
+========================================================
+* Learning R is opposite of learning a musical instrument
+* Guitar: Learn scales, then Wonderwall
+* R: Learn Wonderwall, then scales
+
+![Alt Text](http://31.media.tumblr.com/tumblr_m8mm9zMnGo1qkyzquo1_500.gif)
+
+
 
 Reproducibility
 ========================================================
@@ -105,7 +135,7 @@ Related to R
 Reproducibility/Reusability
 ========================================================
 class: small-code
-My code from 10 years ago: 
+Caroline's code from 10 years ago: 
 ```{ r,eval=FALSE}
 particlechange<-c(50)
 for( g in 1:30)
@@ -132,7 +162,7 @@ z<-outer(x,y,f)
 Reproducibility/Reusability
 ========================================================
 class: small-code
-My code now: 
+Caroline's code now: 
 
 ```{r, eval=FALSE}
 #Extract median, range and max PM2.5 for each SA2 areas
