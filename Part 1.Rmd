@@ -1,15 +1,40 @@
 ---
 title: "Part 1 Introduction to R"
 author: "By Caroline Gao"
-
 output:
   html_document:
-    theme: cerulean
     highlight: tango
-
+    theme: cerulean
+  pdf_document: 
+    latex_engine: xelatex
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set()
+
+knitr::knit_hooks$set(
+  source = function(x, options) {
+    hook.r = function(x, options) {
+      fence <- "```"
+      language = tolower(options$engine)
+      if (language == 'node') language = 'javascript'
+      if (!options$highlight) language = 'text'
+      if(!is.null(options$foldcode)) {
+      paste0('\n\n', "<details><summary>Your code</summary>\n", fence, language, '\n', x, fence,  '\n\n', "</details>\n")
+      } else {
+              paste0('\n\n', fence, language, '\n', x, fence,  '\n\n')
+      }
+    }
+    x = knitr:::hilight_source(x, 'markdown', options)
+    hook.r(
+      paste(c(
+        x, 
+        ''
+      ), collapse = '\n'), 
+      options
+    )
+  }
+)
+
 
 ```
 
@@ -79,7 +104,7 @@ A better way for managing your data and script files is to create a project.
 
 You can read the paper [Best Practices for Scientific Computing](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745) for further tips on best practices for programming and project organization. 
 
-<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="project",caption = "")`</span> Create a new project in RStudio named R support classes and create a R Script named Week 1
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="project",caption = "")`</span> Create a new project in RStudio named R support classes and create a R Script named Part 1
 
 
 ## Basic R arithmetics and operators
@@ -100,9 +125,11 @@ Also
 * Integer Division: %/%	
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="integer division",caption = "")`</span> Should 1 %/% 0.2 be 4 or 5? 
-```{r,  echo=FALSE, results="hide"}
+
+
+```{r, results="hide", foldcode=TRUE}
 1 %/% 0.2 
-```
+``` 
 
 **Note** %% and x %/% y can be used for non-integer y, e.g. 1 %/% 0.2, but the results are subject to representation error and so may be platform-dependent. Because the IEC 60059 representation of 0.2 is a binary fraction slightly larger than 0.2, the answer to 1 %/% 0.2 should be 4 but many platforms give 5. So make sure you write 10%/%2. 
 
@@ -119,8 +146,7 @@ exp(1)
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="logarithms",caption = "")`</span> Find the logarithms with bases 2 and 10 of 5, 
 
 
-```{r,  echo=FALSE, results="hide"}
-# Your code:
+```{r, results="hide", foldcode=TRUE}
 log2(5)
 log10(5)
 ```
@@ -181,7 +207,7 @@ ls()
 
 You can use rm to delete objects you no longer need:
 ```{r}
-rm(x)
+rm(c)
 ```
 
 If you have lots of things in your environment and want to delete all of them, you can pass the results of ls to the rm function:
@@ -189,10 +215,10 @@ If you have lots of things in your environment and want to delete all of them, y
 rm(list = ls())
 ```
 
-<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="remove",caption = "")` </span> Clean up your working environment by deleting the mass and age variables.
-```{r,  echo=FALSE, results="hide"}
-# your code:
-rm(age,mass)
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="remove",caption = "")` </span> Clean up your working environment by deleting the a and b variables.
+
+```{r,  results="hide", foldcode=TRUE}
+rm(a,b)
 ```
 
 ### R Packages
@@ -205,16 +231,15 @@ It is possible to add functions to R by writing a package, or by obtaining a pac
 * You can remove a package with remove.packages("packagename")
 * You can make a package available for use with library(packagename)
 
-<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="install",caption = "")`</span> Install packages: ggplot2, plyr
+Install packages: ggplot2, plyr
 
-```{r,  echo=FALSE, results="hide",eval = FALSE}
-# your code:
+```{r,eval = FALSE}
 install.packages("ggplot2")
 install.packages("dplyr")
 ```
 
 **Note** You might have seen people using require() to load libraries. However it is better to use library(). Although they both can load an R package, require() will try to load the package using library() and return a logical value indicating the success or failure. The problem is when the library is not installed, require will signal a warning whereas library will signal an error.
-```{r error=TRUE}
+```{r, error=TRUE}
 ## if foo librry is not installed 
 require('foo')
 library("foo")
@@ -224,14 +249,14 @@ library("foo")
 
 R, and every package, provide help files for functions. To search for help on a function from a specific function that is in a package loaded into your namespace (your interactive R session):
 
-```{r}
+```{r,eval = FALSE}
 ?vector()
 help(vector)
 ```
 
-<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="help",caption = "")`</span> What should you do when you do not remember the function name exactly?
+What should you do when you do not remember the function name exactly?
 
-```{r}
+```{r,eval = FALSE}
 ??log
 ```
 
@@ -274,11 +299,11 @@ z <- as.integer(555.55)
 ```
 
 
-### Vectors
+## Vectors
 
 A vector is a collection of elements that are most commonly of mode character, logical, integer or numeric.
 
-#### Create vectors
+### Create vectors
 
  You can create an empty vector with vector(). (By default the mode is logical. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as character(), numeric(), etc.
 
@@ -289,8 +314,9 @@ vector("character", length = 5) # a vector of mode 'character' with 5 elements
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="create vector",caption = "")`</span> Create a  numeric vector with 5 element using constructor directly. 
 
-```{r,  echo=FALSE, results="hide"}
-numeric(5)   
+
+```{r,  results="hide", foldcode=TRUE}
+x<- numeric(5)   
 
 ```
 
@@ -312,7 +338,7 @@ Using TRUE and FALSE will create a vector of mode logical and using quoted text 
 z <- c("Sarah", "Tracy", "Jon") 
 ```
 
-#### Examining vectors
+### Examining vectors
 The functions typeof(), length(), class() and str() provide useful information about your vectors and R objects in general.
 
 ```{r}
@@ -321,18 +347,19 @@ length(z)
 class(z)
 ```
 
-#### Adding elements
+### Adding elements
 
 The function c() (for combine) can also be used to add elements to a vector. 
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="add element",caption = "")`</span> Add name "Annette" to vector z.
 
-```{r,  echo=FALSE, results="hide"}
+
+```{r, results="hide", foldcode=TRUE}
 z <- c(z, "Annette")
 z
 ```
 
-#### Vectors from a sequence of numbers
+### Vectors from a sequence of numbers
 
 You can create vectors as a sequence of numbers.
 ```{r}
@@ -342,7 +369,7 @@ seq(10)
 seq(from = 1, to = 10, by = 0.1)
 ```
 
-#### Naming a vector 
+### Naming a vector 
 
 You can give a name to the elements of a vector with the names()
 ```{r}
@@ -351,7 +378,7 @@ names(temperature) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 ```
 
 
-#### Vector index 
+### Vector index 
 
 The values in a vector can be extracted via declaring an index or name inside a single square bracket "[]" operator. For example: 
 
@@ -376,7 +403,9 @@ temperature[c(1,1,1,2,2,2)]
 
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index",caption = "")` Extract values for Wednesday and Friday.
-```{r,  echo=FALSE, results="hide"}
+
+
+```{r, results="hide", foldcode=TRUE}
 temperature[c("Wednesday","Friday")]
 #or 
 temperature[c(3,5)]
@@ -390,13 +419,14 @@ temperature[-1]
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index outofrange",caption = "")`</span>  Find out what would happen if an index is out-of-range.
 
-```{r,  echo=FALSE, results="hide"}
+
+```{r,   results="hide", foldcode=TRUE}
 temperature[10] 
 ``` 
 
 **Note** R will not through a warning or error for index out-of-range! 
 
-#### Missing data
+### Missing data
 
 R supports missing data in vectors. They are represented as NA (Not Available) and can be used for all the vector types :
 ```{r}
@@ -411,7 +441,7 @@ is.na(x)
 anyNA(x)
 ```
 
-#### Other special values
+### Other special values
 Inf is infinity. You can have either positive or negative infinity.
 ```{r}
 1/0
@@ -420,7 +450,7 @@ Inf is infinity. You can have either positive or negative infinity.
 
 NaN means Not a Number. Its an undefined value. NaN is NA, whereas NA is not NaN
 
-#### Coercion
+### Coercion
 
 What Happens When You Mix Types Inside a Vector? R will create a resulting vector with a mode that can most easily accommodate all the elements it contains. This conversion between modes of storage is called coercion. When R converts the mode of storage based on its content, it is referred to as implicit coercion. 
 
@@ -432,8 +462,20 @@ z <- c("a", TRUE)
 
 ```
 
+### Vectorization 
 
-<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="max temperature",caption = "")`</span>  Here I created a vector for average temperature in Melbourne for each month. Find out which month has the maximum temperature.
+
+The concept of vectorization is unique to languages such as R and Python. it means using A "vectorized" function to work on not just on a single value, but on a whole vector of values at the same time. The golden rule in efficient R programming is to use "vectorized" function to accessing the underlying C/Fortran routines as quickly as possible.
+
+See more resources on vectorization:
+
+http://rpubs.com/daspringate/vectorisation
+
+http://www.johnmyleswhite.com/notebook/2013/12/22/the-relationship-between-vectorized-and-devectorized-code/
+
+http://www.noamross.net/blog/2014/4/16/vectorization-in-r--why.html
+
+Here I created a vector for average temperature in Melbourne for each month (not real).
 
 ```{r}
 temperature=c(	21,	21,	19,	17, 14, 11,10, 11,	13,	15,	17,	19)
@@ -441,20 +483,30 @@ names(temperature)<-month.abb
 temperature
 ```
 
+If I want to know the maximum temperature, I can use a max function on the temperature vector instead of looping for all element of the temperature. 
 
-```{r,  echo=FALSE, results="hide"}
-temperature[which.max(temperature)]
+```{r}
+#loop 
+max=0
+for(i in 1:length(temperature))
+  if(temperature[i]>max) {
+    max = temperature[i]
+  }
+max
+#vectorized code
+max(temperature)
 ```
 
-<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="temperature difference",caption = "")`</span>  Find out the temperature difference between the month with maximum temperature and the month with minimum temperature.
 
-```{r,  echo=FALSE, results="hide"}
-# your code:
-temperature[[which.max(temperature)]]- temperature[[which.min(temperature)]]
+<span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="max temperature",caption = "")`</span>  Find out which month has the maximum temperature.
+
+```{r,   results="hide", foldcode=TRUE}
+temperature==max(temperature)
+temperature[temperature==max(temperature)]
 ```
 
 
-### Factors
+## Factors
 
 Another important data structure is called a factor. Factors usually look like character data, but are typically used to represent categorical information. For example, let's create a factor variable ses:
 
@@ -481,7 +533,6 @@ levels(temp_level.f)
 We can also generate factor variable from numeric data by specifing labels using the labels argument or using the cut function 
 
 
-
 ```{r}
 # from a numaric vector
 temp_num <- c( 3,3,2,2,1,1,1,1,1,1,2,2) 
@@ -497,7 +548,7 @@ temp_num.f
 However you have to be careful with converting numeric variables to factor variables . See the following example: 
 
 ```{r}
-# wrong orde of the levels defined
+# wrong order of the levels defined
 temp_num.f<-factor(temp_num, levels=c(3,2,1), labels=c("low","middle", "high"))
 temp_num.f
 ```
@@ -505,7 +556,7 @@ temp_num.f
 The levels argument determines the categories of the factor variable, and the default is the sorted list of all the distinct values of the data vector. This is particular useful as the order of levels is quite important in many analyses such as linear regression and generalised linear models. The lowest level will be automatically set as the reference category. The labels argument states a vector of values that will be the labels of the categories in the levels argument. You have to remember that the levels argument and labels argument should be matching.
 
 
-#### R factor variable vs Stata categorical variable 
+### R factor variable vs Stata categorical variable 
 
 R factor variable is similar but different from Stata categorical variable. Factor variable in R is evaluated/compared/operated the same as character/string variable rather than numeric variable. 
 
@@ -522,7 +573,7 @@ mean(as.numeric(temperature))
 mean(as.numeric(levels(temperature)[temperature]))
 mean(as.numeric(as.character(temperature)))
 ```
-#### Ordered factor
+### Ordered factor
 
 Ordered factor variables can be created by using the function ordered. This function has the same arguments as the factor function. To create an ordered factor variable called ses.order based on the variable ses.
 
@@ -535,9 +586,9 @@ temp_level.order <- ordered(temp_level, levels = c("low", "middle", "high"))
 **Note** ordered factor variables and factor variables may look similar. However it can be crucial for some of analysis. As linear regression for example, if a predictor is a factor variable, R will create dummy variables for each levels of the variable (excluding the baseline level). If a predictor is an ordered factor variable, R will create orthogonal polynomial coding for each level of the variable, then the variable will be treated as a continious variable. 
 
 
-#### Adding and dropping levels 
+### Adding and dropping levels 
 
-Below we will add an element from a new level ("very.high") to ses.f our existing factor variable, temp_level.f.  The number in the square brackets ( [] ) indicates the number of the element whose label we wish to change.
+Below we will add an element from a new level ("very.high") to our existing factor variable, temp_level.f.  The number in the square brackets ( [] ) indicates the number of the element whose label we wish to change.
 
 ```{r}
 temp_level.f[13] <- "very.high"
@@ -547,7 +598,8 @@ The problme is that instead of changing from "high" to "very.high", the label wa
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="add new level",caption = "")`</span>  Complete this task correctly (hint: you need to first add the new level, "very.high", to the factor variable ses.f)
 
-```{r,  echo=FALSE, results="hide"}
+
+```{r,   results="hide", foldcode=TRUE}
 temp_level.f <- factor(temp_level.f, levels = c(levels(temp_level.f), "very.high"))
 temp_level.f[13] <- "very.high"
 temp_level.f
@@ -563,12 +615,14 @@ table(temp_level.f.new)
 ```
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="drop level",caption = "")`</span>  Drop the level very.high via converting very.high to NA. 
-```{r,  echo=FALSE, results="hide"}
+
+
+```{r,   results="hide", foldcode=TRUE}
 levels(temp_level.f)[levels(temp_level.f)=='very.high'] <- NA
 table(temp_level.f)
 ```
 
-### Matrix
+## Matrix
 
 In R matrices are an extension of the numeric or character vectors. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns.
 
@@ -604,7 +658,8 @@ What was the correct command used to write this matrix? Examine each command and
 3. matrix(c(4, 9, 10, 1, 5, 7), nrow = 3)
 4. matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)
 
-```{r,  echo=FALSE, results="hide"}
+
+```{r,  results="hide", foldcode=TRUE}
 matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)
 matrix(c(4, 9, 10, 1, 5, 7), nrow = 3)
 ```
@@ -618,14 +673,14 @@ z <- 1:6
 
 ```
 
-```{r,  echo=FALSE, results="hide"}
+```{r }
 cbind(x, y)
 rbind(x, y)
 cbind(x,z)
 rbind(x,z)
 ```
 
-### List
+## List
 
 In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called generic vectors, because the elements of a list can by of any type of R object, even lists containing further lists. This property makes them fundamentally different from atomic vectors.
 
@@ -662,7 +717,7 @@ xlist$b
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="list index",caption = "")`</span> What is the class of xlist[2]? What about xlist[[2]] and xlist$b ?
 
-```{r,  echo=FALSE, results="hide"}
+```{r,results="hide", foldcode=TRUE}
 class(xlist[2])
 class(xlist[[2]])
 class(xlist$b)
@@ -685,13 +740,14 @@ exam<-list(name=c("Caroline","Tyler", "David"),exam1=c(50,99,80),exam2=c(40,NA,1
 exam
 ```
 
-```{r,  echo=FALSE, results="hide"}
+
+```{r,   results="hide", foldcode=TRUE}
 exam$exam2[is.na(exam$exam2)]<-0
 exam$name[ifelse(exam$exam1*0.5+exam$exam2*0.5>=50,"Y","N")!=exam$Passed]
 ```
 
 
-### Data frame
+## Data frame
 
 A data frame is a very important data type in R. Its pretty much the de facto data structure for most tabular data and what we use for statistics.
 
@@ -722,7 +778,7 @@ Useful Data Frame Functions
 We will use the iris dataset here (https://en.wikipedia.org/wiki/Iris_flower_data_set).
 
 
-#### Data frame index
+### Data frame index
 
 A data frame, much like a matrix, has two dimensions  rows and columns. To index a data frame (or a matrix), we use brackets in R next to the object, like so:
 
@@ -731,7 +787,8 @@ iris[i, j]
 Where i denotes the rows that you want and j is the columns. 
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index data frame",caption = "")`</span> :Extract the first 10 rows of the iris dataset. 
-```{r,  echo=FALSE, results="hide"}
+
+```{r,  results="hide", foldcode=TRUE}
 iris[1:10,]
 ```
 
@@ -742,13 +799,14 @@ iris$Species
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="index data frame 2",caption = "")`</span> Find out how many rows of data in iris dataset where Species is setosa.
 
-```{r,  echo=FALSE, results="hide"}
+
+```{r,  results="hide", foldcode=TRUE}
 nrow(iris[iris$Species=="setosa",])
 # or
 nrow(subset(iris,Species=="setosa"))
 ```
 
-#### Adding columns and rows in dataframe
+### Adding columns and rows in dataframe
 
 We learned that the columns in a data frame were vectors, so that our data are consistent in type throughout the column. As such, if we want to add a new column, we need to start by making a new vector:
 ```{r }
@@ -757,10 +815,12 @@ head(iris)
 ```
 
 
-#### Read data
+### Read data
 
 To read a csv file, you can use read.csv() and read.table() function from your local computer. Files can also be downloaded directly from the Internet into a local folder of your choice onto your computer using the download.file function. The read.csv function can then be executed to read the downloaded file from the download location, for example,
-```{r,  echo=FALSE, results="hide"}
+
+
+```{r,  results="hide", foldcode=TRUE}
 # download.file("https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder-FiveYearData.csv", destfile = "data/gapminder-FiveYearData.csv")
 
 gapminder <- read.csv("gapminder-FiveYearData.csv")
@@ -774,7 +834,7 @@ gapminder <- read.csv("https://raw.githubusercontent.com/swcarpentry/r-novice-ga
 
 Another type of file you might encounter are tab-separated value files (.tsv). To specify a tab as a separator, use "\\t" or read.delim(). You can read directly from excel spreadsheets without converting them to plain text first by using the [readxl](https://cran.r-project.org/web/packages/readxl/index.html) package.
 
-#### Investigate data frame
+### Investigate data frame
 
 The first thing we always do is check out what the data looks like. This can be easily done with str:
 ```{r}
@@ -790,13 +850,15 @@ length(gapminder)
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="gapminder low lifeExp",caption = "")`</span> Extract names of countries which have life expectancy below 40s before 1980 (with one line of code).
 
-```{r,  echo=FALSE, results="hide"}
+
+```{r, results="hide", foldcode=TRUE}
 unique(gapminder[gapminder$year<1980 & gapminder$lifeExp<40,"country"])
 ```
 
 <span style="color:Green;font-weight: bold;font-size:1.2em ">`r Challenge_nums(name="increasing lifeExp",caption = "")`</span> Extract names of countries with increasing life expectancy only (with one line of code).
 
-```{r,  echo=FALSE, results="hide"}
+
+```{r,  results="hide", foldcode=TRUE}
 unique(gapminder$country)[as.vector(by(gapminder$lifeExp,gapminder$country,function(x) all(x == cummax(x))))]
 ```
 
