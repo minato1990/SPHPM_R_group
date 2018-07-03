@@ -44,35 +44,11 @@ height: 900
 Welcome to the first SPHPM R Group Meeting!
 ========================================================
 * Who I am - Tyler Lane
-<<<<<<< HEAD
-=======
   - Post-doc in the Insurance, Work and Health Group
   - R amateur (~2 years)
   - SPSS refugee
   - tyler.lane@monash.edu
 * I'll talk about
-  - SPHPM Group
-  - Reasons to use R
-  - Some simple code showing capabilities
-  - Unsolicited R learning advice
-
-
-SPHPM R Group purpose
-========================================================
-* Create a community of R users
-* Provide some training
-* Share resources
-* Tips on best practice
->>>>>>> af7e33f9fd431dceda71f3c3fd37313353ce901d
-
-  - Post-doc in the Insurance, Work and Health Group
-  - R amateur (~2 years)
-  - SPSS refugee
-  - tyler.lane@monash.edu
- 
- 
-* I'll talk about
-
   - SPHPM Group
   - Reasons to use R
   - Some simple code showing capabilities
@@ -233,8 +209,7 @@ W = 42, p-value = 0.001871
 alternative hypothesis: true location shift is not equal to 0
 ```
 
-=======
->>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
+
 Disadvantages of R
 ========================================================
 * Steep learning curve
@@ -254,6 +229,20 @@ My unsolicited advice
 
 <img src="http://31.media.tumblr.com/tumblr_m8mm9zMnGo1qkyzquo1_500.gif" width="70%">
 
+Welcome, again! 
+========================================================
+* Who I am - Caroline Gao
+  - Biostatistican in Hazelwood Study
+  - Teach R & use R in teaching
+  - Still wondering around in R 
+  - STATA supporter 
+  - Carolie.Gao@monash.edu
+* I'll talk about
+  - Reproducible research
+  - Efficiency
+  - Get everyone ready for training from next week
+
+
 
 Reproducible research
 ========================================================
@@ -268,23 +257,16 @@ Re-run, repeat, reproduce, reuse, replicate: transforming code into scientific c
 
 
 
-<<<<<<< HEAD
-Key points we'll talk about today
-=======
+
 Re-runnable
->>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 ========================================================
-* Reproducibility
-* Readability/reusability
-* Version control
-  - Tracking package dependencies per project using packrat or checkpoint
+<br> 
+
 ![Alt Text](http://revolution-computing.typepad.com/.a/6a010534b1db25970b01bb0794c2fc970d-800wi) 
 
-<<<<<<< HEAD
-=======
 * Ignoring package version control??
 * Tracking package dependencies per project using packrat or checkpoint
->>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
+
 
 
 <div class="footnote">
@@ -344,14 +326,11 @@ From she knows what she was doing to only god knows what she was doing :(
 
 Reusable
 ========================================================
-<<<<<<< HEAD
 class: small-code
-Caroline's code now
-=======
+
 
 Caroline's code now: 
 
->>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 
 ```r
 #Extract median ambulance rates for each SA2 areas
@@ -385,8 +364,7 @@ Replicable
 <br> 
 
 
-<img src="Week 1-figure/share_research_code.png" width="85%">
-
+<img src="Week 1-figure/share_research_code.png" width="90%">
 
 
 
@@ -425,4 +403,4 @@ Happy coding!
 ========================================================
 $~$
 
-![Alt Text](https://78.media.tumblr.com/61b853de39924e1bf261ff26f363a98e/tumblr_inline_o539xbgPGh1ssbz72_500.gif)
+<img src="https://78.media.tumblr.com/61b853de39924e1bf261ff26f363a98e/tumblr_inline_o539xbgPGh1ssbz72_500.gif" width="70%">
