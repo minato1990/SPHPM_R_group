@@ -43,12 +43,28 @@ height: 900
 
 Welcome to the first SPHPM R Group Meeting!
 ========================================================
-* Purpose: 
-  - Create a community of R users
-  - Provide some training
-  - Tips on best practice
+* Who I am - Tyler Lane
+
+  - Post-doc in the Insurance, Work and Health Group
+  - R amateur (~2 years)
+  - SPSS refugee
+  - tyler.lane@monash.edu
+ 
+ 
+* I'll talk about
+
+  - SPHPM Group
+  - Reasons to use R
+  - Some simple code showing capabilities
+  - Unsolicited R learning advice
 
 
+SPHPM R Group purpose
+========================================================
+* Create a community of R users
+* Provide some training
+* Share resources
+* Tips on best practice
 
 
 What stats packages do you currently use?
