@@ -236,7 +236,7 @@ Welcome, again!
   - Biostatistican in Hazelwood Study
   - Teach R & use R in teaching
   - Still wondering around in R 
-  - STATA supporter 
+  - Stata supporter 
   - Carolie.Gao@monash.edu
 * I'll talk about
   - Reproducible research
@@ -323,7 +323,7 @@ r<-1-exp(-4*1*0.001386*0.48*particlesum[x*10]*tcid[y*10]*1000000*0.001/(3*(x*0.2
 z<-outer(x,y,f)
 ```
 
-From she knows what she was doing to only god knows what she was doing :( 
+From she knows what she was doing to only God knows what she was doing :( 
 
 Reusable
 ========================================================
@@ -351,8 +351,9 @@ Better now?
 Reusable
 ========================================================
 
-You don't really want this:
 
+<br>
+<br>
 <img src="https://imgs.xkcd.com/comics/code_quality.png" width="80%">
 
 
