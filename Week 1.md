@@ -44,6 +44,26 @@ height: 900
 Welcome to the first SPHPM R Group Meeting!
 ========================================================
 * Who I am - Tyler Lane
+<<<<<<< HEAD
+=======
+  - Post-doc in the Insurance, Work and Health Group
+  - R amateur (~2 years)
+  - SPSS refugee
+  - tyler.lane@monash.edu
+* I'll talk about
+  - SPHPM Group
+  - Reasons to use R
+  - Some simple code showing capabilities
+  - Unsolicited R learning advice
+
+
+SPHPM R Group purpose
+========================================================
+* Create a community of R users
+* Provide some training
+* Share resources
+* Tips on best practice
+>>>>>>> af7e33f9fd431dceda71f3c3fd37313353ce901d
 
   - Post-doc in the Insurance, Work and Health Group
   - R amateur (~2 years)
@@ -70,7 +90,6 @@ SPHPM R Group purpose
 What stats packages do you currently use?
 ========================================================
 * MS Excel 
-  - My main stats software when I was a statistician in the UK govt!
 * SPSS
 * STATA
 * SAS
@@ -87,6 +106,8 @@ class: small-code
 * Extremely flexible
   - User-developed packages to do just about anything
 * Vibrant, passionate, and supportive user community
+* Easy to share code
+* Increasingly popular
 * Built-in datasets to practice with
 
 ```r
@@ -95,12 +116,55 @@ ls("package:datasets")
 ```
 
 
+Built-in package: mtcars
+========================================================
+class:small-code
+
+```
+                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+
 Pretty graphs
 ========================================================
 class: small-code
+<div align = "center">
 
 ```r
 # load necessary package
+# install.packages("ggplot2") # If necessary remove first '#' to install ggplot2 package 
 library(ggplot2) 
 # convert target variable to factor with meaningful labels
 mtcars$Transmission <- factor(mtcars$am, 
@@ -117,6 +181,60 @@ ggplot(mtcars, aes(x = mpg, fill = Transmission)) +
 
 
 
+Testing transmission/fuel relationship with simple code
+========================================================
+class: small-code
+
+```r
+# Is fuel efficiency normally distributed?
+shapiro.test(mtcars # function for normal test(data.frame
+             $mpg) # variable, denoted with '$'
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  mtcars$mpg
+W = 0.94756, p-value = 0.1229
+```
+
+
+Testing transmission/fuel relationship with simple code
+========================================================
+class: small-code
+
+```r
+# Is fuel efficiency normally distributed?
+shapiro.test(mtcars # function for normal test(data.frame
+             $mpg) # variable, denoted with '$'
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  mtcars$mpg
+W = 0.94756, p-value = 0.1229
+```
+
+
+```r
+# Not normally distributed; need nonparametric test (Mann-Whitney U)
+wilcox.test(mtcars$mpg ~ mtcars$am)
+```
+
+```
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  mtcars$mpg by mtcars$am
+W = 42, p-value = 0.001871
+alternative hypothesis: true location shift is not equal to 0
+```
+
+=======
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 Disadvantages of R
 ========================================================
 * Steep learning curve
@@ -150,13 +268,23 @@ Re-run, repeat, reproduce, reuse, replicate: transforming code into scientific c
 
 
 
+<<<<<<< HEAD
+Key points we'll talk about today
+=======
 Re-runnable
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 ========================================================
-
+* Reproducibility
+* Readability/reusability
+* Version control
+  - Tracking package dependencies per project using packrat or checkpoint
 ![Alt Text](http://revolution-computing.typepad.com/.a/6a010534b1db25970b01bb0794c2fc970d-800wi) 
 
+<<<<<<< HEAD
+=======
 * Ignoring package version control??
 * Tracking package dependencies per project using packrat or checkpoint
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 
 
 <div class="footnote">
@@ -188,7 +316,7 @@ then re-obtain the same result.
 Reusable
 ========================================================
 class: small-code
-Caroline's code from 10 years ago: 
+Caroline's code from 10 years ago
 ```{ r,eval=FALSE}
 particlechange<-c(50)
 for( g in 1:30)
@@ -216,9 +344,14 @@ From she knows what she was doing to only god knows what she was doing :(
 
 Reusable
 ========================================================
+<<<<<<< HEAD
+class: small-code
+Caroline's code now
+=======
 
 Caroline's code now: 
 
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 
 ```r
 #Extract median ambulance rates for each SA2 areas
@@ -281,14 +414,14 @@ Efficiency
 House keeping
 ========================================================
 * Install R and Rstudio
-* Install package: knit,ggplot2, dplyr, tidyr
+* Install package: knit, ggplot2, dplyr, tidyr
 * Download Github study material from: https://github.com/CarolineXGao/SPHPM_R_group (use the Clone or download button).
 * Feel free to start reading the training document before next week (Part_1.html), we will only cover selective materials
 * There are some also additional study materials provided in Part 1 (coursea video lectures, swirl etc) for your interest
 
 
 
-Happy coding
+Happy coding!
 ========================================================
 $~$
 

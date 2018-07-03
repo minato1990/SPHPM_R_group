@@ -44,6 +44,26 @@ height: 900
 Welcome to the first SPHPM R Group Meeting!
 ========================================================
 * Who I am - Tyler Lane
+<<<<<<< HEAD
+=======
+  - Post-doc in the Insurance, Work and Health Group
+  - R amateur (~2 years)
+  - SPSS refugee
+  - tyler.lane@monash.edu
+* I'll talk about
+  - SPHPM Group
+  - Reasons to use R
+  - Some simple code showing capabilities
+  - Unsolicited R learning advice
+
+
+SPHPM R Group purpose
+========================================================
+* Create a community of R users
+* Provide some training
+* Share resources
+* Tips on best practice
+>>>>>>> af7e33f9fd431dceda71f3c3fd37313353ce901d
 
   - Post-doc in the Insurance, Work and Health Group
   - R amateur (~2 years)
@@ -70,7 +90,6 @@ SPHPM R Group purpose
 What stats packages do you currently use?
 ========================================================
 * MS Excel 
-  - My main stats software when I was a statistician in the UK govt!
 * SPSS
 * STATA
 * SAS
@@ -87,6 +106,8 @@ class: small-code
 * Extremely flexible
   - User-developed packages to do just about anything
 * Vibrant, passionate, and supportive user community
+* Easy to share code
+* Increasingly popular
 * Built-in datasets to practice with
 ```{r, eval = FALSE}
 # To see this, enter this code in your console
@@ -94,11 +115,21 @@ ls("package:datasets")
 ```
 
 
+Built-in package: mtcars
+========================================================
+class:small-code
+```{r, echo = F}
+mtcars
+```
+
+
 Pretty graphs
 ========================================================
 class: small-code
-```{r my plot, fig.width = 15, fig.height = 6}
+<div align = "center">
+```{r my plot, fig.width = 15, fig.height = 7}
 # load necessary package
+# install.packages("ggplot2") # If necessary remove first '#' to install ggplot2 package 
 library(ggplot2) 
 # convert target variable to factor with meaningful labels
 mtcars$Transmission <- factor(mtcars$am, 
@@ -113,6 +144,32 @@ ggplot(mtcars, aes(x = mpg, fill = Transmission)) +
 
 
 
+Testing transmission/fuel relationship with simple code
+========================================================
+class: small-code
+```{r}
+# Is fuel efficiency normally distributed?
+shapiro.test(mtcars # function for normal test(data.frame
+             $mpg) # variable, denoted with '$'
+```
+
+
+Testing transmission/fuel relationship with simple code
+========================================================
+class: small-code
+```{r}
+# Is fuel efficiency normally distributed?
+shapiro.test(mtcars # function for normal test(data.frame
+             $mpg) # variable, denoted with '$'
+```
+
+```{r}
+# Not normally distributed; need nonparametric test (Mann-Whitney U)
+wilcox.test(mtcars$mpg ~ mtcars$am)
+```
+
+=======
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 Disadvantages of R
 ========================================================
 * Steep learning curve
@@ -146,13 +203,23 @@ Re-run, repeat, reproduce, reuse, replicate: transforming code into scientific c
 
 
 
+<<<<<<< HEAD
+Key points we'll talk about today
+=======
 Re-runnable
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 ========================================================
-
+* Reproducibility
+* Readability/reusability
+* Version control
+  - Tracking package dependencies per project using packrat or checkpoint
 ![Alt Text](http://revolution-computing.typepad.com/.a/6a010534b1db25970b01bb0794c2fc970d-800wi) 
 
+<<<<<<< HEAD
+=======
 * Ignoring package version control??
 * Tracking package dependencies per project using packrat or checkpoint
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 
 
 <div class="footnote">
@@ -184,7 +251,7 @@ then re-obtain the same result.
 Reusable
 ========================================================
 class: small-code
-Caroline's code from 10 years ago: 
+Caroline's code from 10 years ago
 ```{ r,eval=FALSE}
 particlechange<-c(50)
 for( g in 1:30)
@@ -212,9 +279,14 @@ From she knows what she was doing to only god knows what she was doing :(
 
 Reusable
 ========================================================
+<<<<<<< HEAD
+class: small-code
+Caroline's code now
+=======
 
 Caroline's code now: 
 
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 ```{r, eval=FALSE}
 #Extract median ambulance rates for each SA2 areas
 Median_SA2<-Ambo_timeseries %>%
@@ -277,14 +349,14 @@ Efficiency
 House keeping
 ========================================================
 * Install R and Rstudio
-* Install package: knit,ggplot2, dplyr, tidyr
+* Install package: knit, ggplot2, dplyr, tidyr
 * Download Github study material from: https://github.com/CarolineXGao/SPHPM_R_group (use the Clone or download button).
 * Feel free to start reading the training document before next week (Part_1.html), we will only cover selective materials
 * There are some also additional study materials provided in Part 1 (coursea video lectures, swirl etc) for your interest
 
 
 
-Happy coding
+Happy coding!
 ========================================================
 $~$
 
