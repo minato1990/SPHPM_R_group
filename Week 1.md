@@ -160,10 +160,10 @@ ggplot(mtcars, aes(x = mpg, fill = Transmission)) +
 Testing transmission/fuel relationship with simple code
 ========================================================
 class: small-code
+Is fuel efficiency normally distributed?
 
 ```r
-# Is fuel efficiency normally distributed?
-shapiro.test(mtcars # function for normal test(data.frame
+shapiro.test(mtcars # function for normal test(data.frame)
              $mpg) # variable, denoted with '$'
 ```
 
@@ -179,10 +179,10 @@ W = 0.94756, p-value = 0.1229
 Testing transmission/fuel relationship with simple code
 ========================================================
 class: small-code
+Is fuel efficiency normally distributed?
 
 ```r
-# Is fuel efficiency normally distributed?
-shapiro.test(mtcars # function for normal test(data.frame
+shapiro.test(mtcars # function for normal test(data.frame)
              $mpg) # variable, denoted with '$'
 ```
 
@@ -193,18 +193,19 @@ shapiro.test(mtcars # function for normal test(data.frame
 data:  mtcars$mpg
 W = 0.94756, p-value = 0.1229
 ```
-
+Test was unable to reject hypothesis of normal distribution, but plot on previous slide suggested it was not normal; so, running a non-parametric test
 
 ```r
-# Not normally distributed; need nonparametric test (Mann-Whitney U)
-wilcox.test(mtcars$mpg ~ mtcars$am)
+wilcox.test(mpg ~ # function for nonparametric test and dependent variable
+              Transmission, # independent variable
+            data = mtcars) # specify data.frame
 ```
 
 ```
 
 	Wilcoxon rank sum test with continuity correction
 
-data:  mtcars$mpg by mtcars$am
+data:  mpg by Transmission
 W = 42, p-value = 0.001871
 alternative hypothesis: true location shift is not equal to 0
 ```
