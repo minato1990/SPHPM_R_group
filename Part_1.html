@@ -186,7 +186,7 @@ $(document).ready(function () {
 </ul>
 <p>To check your current working directory you can use getwd() function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getwd</span>()</code></pre></div>
-<pre><code>## [1] &quot;\\\\ad.monash.edu/home/User005/xiaoleig/Documents/SPHPM_R_group&quot;</code></pre>
+<pre><code>## [1] &quot;Z:/SPHPM_R_group&quot;</code></pre>
 <p>When using R markdown root.dir can be specified using</p>
 <p>knitr::opts_knit$set(echo = TRUE, root.dir = “…”)</p>
 </div>
@@ -201,7 +201,7 @@ $(document).ready(function () {
 <li>Click the Create Project button.</li>
 </ol>
 <p>You can read the paper <a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745">Best Practices for Scientific Computing</a> for further tips on best practices for programming and project organization.</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 1: </span> Create a new project in RStudio named R support classes and create a R Script named Week 1</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 1: </span> Create a new project in RStudio named R support classes and create a R Script named Part 1</p>
 </div>
 </div>
 <div id="basic-r-arithmetics-and-operators" class="section level2">
@@ -219,6 +219,9 @@ $(document).ready(function () {
 </ul>
 <p>Also * Remainder: %% * Integer Division: %/%</p>
 <p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 2: </span> Should 1 %/% 0.2 be 4 or 5?</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">%/%</span><span class="st"> </span><span class="fl">0.2</span> </code></pre></div>
+<p></details></p>
 <p><strong>Note</strong> %% and x %/% y can be used for non-integer y, e.g. 1 %/% 0.2, but the results are subject to representation error and so may be platform-dependent. Because the IEC 60059 representation of 0.2 is a binary fraction slightly larger than 0.2, the answer to 1 %/% 0.2 should be 4 but many platforms give 5. So make sure you write 10%/%2.</p>
 </div>
 <div id="mathematical-functions" class="section level3">
@@ -229,6 +232,10 @@ $(document).ready(function () {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(<span class="dv">1</span>)</code></pre></div>
 <pre><code>## [1] 2.718282</code></pre>
 <p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 3: </span> Find the logarithms with bases 2 and 10 of 5,</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log2</span>(<span class="dv">5</span>)
+<span class="kw">log10</span>(<span class="dv">5</span>)</code></pre></div>
+<p></details></p>
 </div>
 <div id="comparing-things" class="section level3">
 <h3>Comparing things</h3>
@@ -278,13 +285,13 @@ b</code></pre></div>
 <pre><code>## [1] &quot;a&quot;              &quot;b&quot;              &quot;c&quot;              &quot;Challenge_nums&quot;</code></pre>
 <p><strong>Note:</strong> ls will hide any variables or functions starting with a . by default. To list all objects, type ls(all.names=TRUE) instead.</p>
 <p>You can use rm to delete objects you no longer need:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(x)</code></pre></div>
-<pre><code>## Warning in rm(x): object 'x' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(c)</code></pre></div>
 <p>If you have lots of things in your environment and want to delete all of them, you can pass the results of ls to the rm function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 4: </span> Clean up your working environment by deleting the mass and age variables.</p>
-<pre><code>## Warning in rm(age, mass): object 'age' not found</code></pre>
-<pre><code>## Warning in rm(age, mass): object 'mass' not found</code></pre>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 4: </span> Clean up your working environment by deleting the a and b variables.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(a,b)</code></pre></div>
+<p></details></p>
 </div>
 <div id="r-packages" class="section level3">
 <h3>R Packages</h3>
@@ -296,7 +303,9 @@ b</code></pre></div>
 <li>You can remove a package with remove.packages(“packagename”)</li>
 <li>You can make a package available for use with library(packagename)</li>
 </ul>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 5: </span> Install packages: ggplot2, plyr</p>
+<p>Install packages: ggplot2, plyr</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)
+<span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
 <p><strong>Note</strong> You might have seen people using require() to load libraries. However it is better to use library(). Although they both can load an R package, require() will try to load the package using library() and return a logical value indicating the success or failure. The problem is when the library is not installed, require will signal a warning whereas library will signal an error.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## if foo librry is not installed 
 <span class="kw">require</span>(<span class="st">'foo'</span>)</code></pre></div>
@@ -309,10 +318,9 @@ b</code></pre></div>
 <div id="get-help" class="section level3">
 <h3>Get help</h3>
 <p>R, and every package, provide help files for functions. To search for help on a function from a specific function that is in a package loaded into your namespace (your interactive R session):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?<span class="kw">vector</span>()</code></pre></div>
-<pre><code>## starting httpd help server ... done</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(vector)</code></pre></div>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 6: </span> What should you do when you do not remember the function name exactly?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?<span class="kw">vector</span>()
+<span class="kw">help</span>(vector)</code></pre></div>
+<p>What should you do when you do not remember the function name exactly?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">??log</code></pre></div>
 </div>
 </div>
@@ -348,17 +356,21 @@ b</code></pre></div>
 x &lt;-<span class="st"> &quot;dataset&quot;</span>
 y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">A=</span><span class="kw">c</span>(<span class="fl">555.55</span>,<span class="dv">444</span>),<span class="dt">B=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>)) 
 z &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="fl">555.55</span>)</code></pre></div>
-<div id="vectors" class="section level3">
-<h3>Vectors</h3>
+</div>
+<div id="vectors" class="section level2">
+<h2>Vectors</h2>
 <p>A vector is a collection of elements that are most commonly of mode character, logical, integer or numeric.</p>
-<div id="create-vectors" class="section level4">
-<h4>Create vectors</h4>
+<div id="create-vectors" class="section level3">
+<h3>Create vectors</h3>
 <p>You can create an empty vector with vector(). (By default the mode is logical. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as character(), numeric(), etc.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vector</span>() <span class="co"># an empty 'logical' (the default) vector</span></code></pre></div>
 <pre><code>## logical(0)</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="dt">length =</span> <span class="dv">5</span>) <span class="co"># a vector of mode 'character' with 5 elements</span></code></pre></div>
 <pre><code>## [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 7: </span> Create a numeric vector with 5 element using constructor directly.</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 5: </span> Create a numeric vector with 5 element using constructor directly.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x&lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">5</span>)   </code></pre></div>
+<p></details></p>
 <p>You can also create vectors by directly specifying their content. R will then guess the appropriate mode of storage for the vector. For instance:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</code></pre></div>
 <p>This will create a vector x of mode numeric. These are the most common kind, and are treated as double precision real numbers. If you wanted to explicitly create integers, you need to add an L to each element (or coerce to the integer type using as.integer()).</p>
@@ -368,8 +380,8 @@ x1</code></pre></div>
 <p>Using TRUE and FALSE will create a vector of mode logical and using quoted text will create a vector of mode character.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Sarah&quot;</span>, <span class="st">&quot;Tracy&quot;</span>, <span class="st">&quot;Jon&quot;</span>) </code></pre></div>
 </div>
-<div id="examining-vectors" class="section level4">
-<h4>Examining vectors</h4>
+<div id="examining-vectors" class="section level3">
+<h3>Examining vectors</h3>
 <p>The functions typeof(), length(), class() and str() provide useful information about your vectors and R objects in general.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(z)</code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
@@ -378,13 +390,17 @@ x1</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(z)</code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 </div>
-<div id="adding-elements" class="section level4">
-<h4>Adding elements</h4>
+<div id="adding-elements" class="section level3">
+<h3>Adding elements</h3>
 <p>The function c() (for combine) can also be used to add elements to a vector.</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 8: </span> Add name “Annette” to vector z.</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 6: </span> Add name “Annette” to vector z.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">c</span>(z, <span class="st">&quot;Annette&quot;</span>)
+z</code></pre></div>
+<p></details></p>
 </div>
-<div id="vectors-from-a-sequence-of-numbers" class="section level4">
-<h4>Vectors from a sequence of numbers</h4>
+<div id="vectors-from-a-sequence-of-numbers" class="section level3">
+<h3>Vectors from a sequence of numbers</h3>
 <p>You can create vectors as a sequence of numbers.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">series &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
 series</code></pre></div>
@@ -400,14 +416,14 @@ series</code></pre></div>
 ## [71]  8.0  8.1  8.2  8.3  8.4  8.5  8.6  8.7  8.8  8.9  9.0  9.1  9.2  9.3
 ## [85]  9.4  9.5  9.6  9.7  9.8  9.9 10.0</code></pre>
 </div>
-<div id="naming-a-vector" class="section level4">
-<h4>Naming a vector</h4>
+<div id="naming-a-vector" class="section level3">
+<h3>Naming a vector</h3>
 <p>You can give a name to the elements of a vector with the names()</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temperature &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">29</span>, <span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">40</span>)
 <span class="kw">names</span>(temperature) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, <span class="st">&quot;Thursday&quot;</span>, <span class="st">&quot;Friday&quot;</span>)</code></pre></div>
 </div>
-<div id="vector-index" class="section level4">
-<h4>Vector index</h4>
+<div id="vector-index" class="section level3">
+<h3>Vector index</h3>
 <p>The values in a vector can be extracted via declaring an index or name inside a single square bracket “[]” operator. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first value in temperature</span>
 temperature[<span class="dv">1</span>]</code></pre></div>
@@ -425,16 +441,24 @@ temperature[<span class="dv">1</span><span class="op">:</span><span class="dv">3
 <pre><code>##  Monday  Monday  Monday Tuesday Tuesday Tuesday 
 ##      30      30      30      29      29      29</code></pre>
 <p>** Note ** Unlike Python, R index starts from 1 rather than 0. Also the square bracket operator returns another vector rather than just individual members. temperature[1] returned a vector slice containing a single member.</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 9: Extract values for Wednesday and Friday.</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 7: Extract values for Wednesday and Friday.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temperature[<span class="kw">c</span>(<span class="st">&quot;Wednesday&quot;</span>,<span class="st">&quot;Friday&quot;</span>)]
+<span class="co">#or </span>
+temperature[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>)]</code></pre></div>
+<p></details></p>
 <p>If the index is negative, it would remove the member whose position has the same absolute value as the negative index. For example, the following creates a vector slice with the third member removed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temperature[<span class="op">-</span><span class="dv">1</span>]</code></pre></div>
 <pre><code>##   Tuesday Wednesday  Thursday    Friday 
 ##        29        20        15        40</code></pre>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 10: </span> Find out what would happen if an index is out-of-range.</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 8: </span> Find out what would happen if an index is out-of-range.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temperature[<span class="dv">10</span>] </code></pre></div>
+<p></details></p>
 <p><strong>Note</strong> R will not through a warning or error for index out-of-range!</p>
 </div>
-<div id="missing-data" class="section level4">
-<h4>Missing data</h4>
+<div id="missing-data" class="section level3">
+<h3>Missing data</h3>
 <p>R supports missing data in vectors. They are represented as NA (Not Available) and can be used for all the vector types :</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="ot">NA</span>, <span class="fl">0.7</span>)
 x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>)</code></pre></div>
@@ -444,8 +468,8 @@ x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE<
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anyNA</span>(x)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-<div id="other-special-values" class="section level4">
-<h4>Other special values</h4>
+<div id="other-special-values" class="section level3">
+<h3>Other special values</h3>
 <p>Inf is infinity. You can have either positive or negative infinity.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">/</span><span class="dv">0</span></code></pre></div>
 <pre><code>## [1] Inf</code></pre>
@@ -453,24 +477,49 @@ x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE<
 <pre><code>## [1] NaN</code></pre>
 <p>NaN means Not a Number. Its an undefined value. NaN is NA, whereas NA is not NaN</p>
 </div>
-<div id="coercion" class="section level4">
-<h4>Coercion</h4>
+<div id="coercion" class="section level3">
+<h3>Coercion</h3>
 <p>What Happens When You Mix Types Inside a Vector? R will create a resulting vector with a mode that can most easily accommodate all the elements it contains. This conversion between modes of storage is called coercion. When R converts the mode of storage based on its content, it is referred to as implicit coercion.</p>
 <p>can you guess what the following do (without running them first)?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.7</span>, <span class="st">&quot;a&quot;</span>)
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="dv">2</span>)
 z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="ot">TRUE</span>)</code></pre></div>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 11: </span> Here I created a vector for average temperature in Melbourne for each month. Find out which month has the maximum temperature.</p>
+</div>
+<div id="vectorization" class="section level3">
+<h3>Vectorization</h3>
+<p>The concept of vectorization is unique to languages such as R and Python. it means using A “vectorized” function to work on not just on a single value, but on a whole vector of values at the same time. The golden rule in efficient R programming is to use “vectorized” function to accessing the underlying C/Fortran routines as quickly as possible.</p>
+<p>See more resources on vectorization:</p>
+<p><a href="http://rpubs.com/daspringate/vectorisation" class="uri">http://rpubs.com/daspringate/vectorisation</a></p>
+<p><a href="http://www.johnmyleswhite.com/notebook/2013/12/22/the-relationship-between-vectorized-and-devectorized-code/" class="uri">http://www.johnmyleswhite.com/notebook/2013/12/22/the-relationship-between-vectorized-and-devectorized-code/</a></p>
+<p><a href="http://www.noamross.net/blog/2014/4/16/vectorization-in-r--why.html" class="uri">http://www.noamross.net/blog/2014/4/16/vectorization-in-r--why.html</a></p>
+<p>Here I created a vector for average temperature in Melbourne for each month (not real).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temperature=<span class="kw">c</span>(  <span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">17</span>, <span class="dv">14</span>, <span class="dv">11</span>,<span class="dv">10</span>, <span class="dv">11</span>,  <span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">17</span>, <span class="dv">19</span>)
 <span class="kw">names</span>(temperature)&lt;-month.abb
 temperature</code></pre></div>
 <pre><code>## Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
 ##  21  21  19  17  14  11  10  11  13  15  17  19</code></pre>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 12: </span> Find out the temperature difference between the month with maximum temperature and the month with minimum temperature.</p>
+<p>If I want to know the maximum temperature, I can use a max function on the temperature vector instead of looping for all element of the temperature.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#loop </span>
+max=<span class="dv">0</span>
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(temperature))
+  <span class="cf">if</span>(temperature[i]<span class="op">&gt;</span>max) {
+    max =<span class="st"> </span>temperature[i]
+  }
+max</code></pre></div>
+<pre><code>## Jan 
+##  21</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#vectorized code</span>
+<span class="kw">max</span>(temperature)</code></pre></div>
+<pre><code>## [1] 21</code></pre>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 9: </span> Find out which month has the maximum temperature.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temperature<span class="op">==</span><span class="kw">max</span>(temperature)
+temperature[temperature<span class="op">==</span><span class="kw">max</span>(temperature)]</code></pre></div>
+<p></details></p>
 </div>
 </div>
-<div id="factors" class="section level3">
-<h3>Factors</h3>
+<div id="factors" class="section level2">
+<h2>Factors</h2>
 <p>Another important data structure is called a factor. Factors usually look like character data, but are typically used to represent categorical information. For example, let’s create a factor variable ses:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create temp_level variable</span>
 temp_level &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;high&quot;</span>, <span class="st">&quot;high&quot;</span> ,<span class="st">&quot;middle&quot;</span> ,<span class="st">&quot;middle&quot;</span> ,<span class="st">&quot;low&quot;</span>, <span class="st">&quot;low&quot;</span>,<span class="st">&quot;low&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;middle&quot;</span> ,<span class="st">&quot;middle&quot;</span>) 
@@ -508,15 +557,15 @@ temp_num.f</code></pre></div>
 ## [11] middle middle
 ## Levels: low middle high</code></pre>
 <p>However you have to be careful with converting numeric variables to factor variables . See the following example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wrong orde of the levels defined</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wrong order of the levels defined</span>
 temp_num.f&lt;-<span class="kw">factor</span>(temp_num, <span class="dt">levels=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;low&quot;</span>,<span class="st">&quot;middle&quot;</span>, <span class="st">&quot;high&quot;</span>))
 temp_num.f</code></pre></div>
 <pre><code>##  [1] low    low    middle middle high   high   high   high   high   high  
 ## [11] middle middle
 ## Levels: low middle high</code></pre>
 <p>The levels argument determines the categories of the factor variable, and the default is the sorted list of all the distinct values of the data vector. This is particular useful as the order of levels is quite important in many analyses such as linear regression and generalised linear models. The lowest level will be automatically set as the reference category. The labels argument states a vector of values that will be the labels of the categories in the levels argument. You have to remember that the levels argument and labels argument should be matching.</p>
-<div id="r-factor-variable-vs-stata-categorical-variable" class="section level4">
-<h4>R factor variable vs Stata categorical variable</h4>
+<div id="r-factor-variable-vs-stata-categorical-variable" class="section level3">
+<h3>R factor variable vs Stata categorical variable</h3>
 <p>R factor variable is similar but different from Stata categorical variable. Factor variable in R is evaluated/compared/operated the same as character/string variable rather than numeric variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temperature =<span class="st"> </span><span class="kw">factor</span>(temperature)
 temperature</code></pre></div>
@@ -534,21 +583,26 @@ temperature</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">as.numeric</span>(<span class="kw">as.character</span>(temperature)))</code></pre></div>
 <pre><code>## [1] 15.66667</code></pre>
 </div>
-<div id="ordered-factor" class="section level4">
-<h4>Ordered factor</h4>
+<div id="ordered-factor" class="section level3">
+<h3>Ordered factor</h3>
 <p>Ordered factor variables can be created by using the function ordered. This function has the same arguments as the factor function. To create an ordered factor variable called ses.order based on the variable ses.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp_level.order &lt;-<span class="st"> </span><span class="kw">ordered</span>(temp_level, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;low&quot;</span>, <span class="st">&quot;middle&quot;</span>, <span class="st">&quot;high&quot;</span>))</code></pre></div>
 <p><span style="color:Red;font-weight: bold;font-size:1.2em "> Discussion </span>: What is the difference between ordered factorr variables and factor variables</p>
 <p><strong>Note</strong> ordered factor variables and factor variables may look similar. However it can be crucial for some of analysis. As linear regression for example, if a predictor is a factor variable, R will create dummy variables for each levels of the variable (excluding the baseline level). If a predictor is an ordered factor variable, R will create orthogonal polynomial coding for each level of the variable, then the variable will be treated as a continious variable.</p>
 </div>
-<div id="adding-and-dropping-levels" class="section level4">
-<h4>Adding and dropping levels</h4>
-<p>Below we will add an element from a new level (“very.high”) to ses.f our existing factor variable, temp_level.f. The number in the square brackets ( [] ) indicates the number of the element whose label we wish to change.</p>
+<div id="adding-and-dropping-levels" class="section level3">
+<h3>Adding and dropping levels</h3>
+<p>Below we will add an element from a new level (“very.high”) to our existing factor variable, temp_level.f. The number in the square brackets ( [] ) indicates the number of the element whose label we wish to change.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp_level.f[<span class="dv">13</span>] &lt;-<span class="st"> &quot;very.high&quot;</span></code></pre></div>
 <pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, 13, value = &quot;very.high&quot;): invalid factor
 ## level, NA generated</code></pre>
 <p>The problme is that instead of changing from “high” to “very.high”, the label was changed from “high” to <NA>.</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 13: </span> Complete this task correctly (hint: you need to first add the new level, “very.high”, to the factor variable ses.f)</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 10: </span> Complete this task correctly (hint: you need to first add the new level, “very.high”, to the factor variable ses.f)</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp_level.f &lt;-<span class="st"> </span><span class="kw">factor</span>(temp_level.f, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="kw">levels</span>(temp_level.f), <span class="st">&quot;very.high&quot;</span>))
+temp_level.f[<span class="dv">13</span>] &lt;-<span class="st"> &quot;very.high&quot;</span>
+temp_level.f</code></pre></div>
+<p></details></p>
 <p>Dropping a level of a factor variable is a little easier. The simplest way is to first remove all the elements within the level to be removed and then to redeclare the variable to be a factor variable. Let’s illustrate this by removing the level of “very.high” from the ses.f variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp_level.f.new &lt;-<span class="st"> </span>temp_level.f[temp_level.f <span class="op">!=</span><span class="st"> &quot;very.high&quot;</span>]
 <span class="kw">table</span>(temp_level.f.new)</code></pre></div>
@@ -560,11 +614,15 @@ temperature</code></pre></div>
 <pre><code>## temp_level.f.new
 ##    low middle   high 
 ##      6      4      2</code></pre>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 14: </span> Drop the level very.high via converting very.high to NA.</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 11: </span> Drop the level very.high via converting very.high to NA.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(temp_level.f)[<span class="kw">levels</span>(temp_level.f)<span class="op">==</span><span class="st">'very.high'</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+<span class="kw">table</span>(temp_level.f)</code></pre></div>
+<p></details></p>
 </div>
 </div>
-<div id="matrix" class="section level3">
-<h3>Matrix</h3>
+<div id="matrix" class="section level2">
+<h2>Matrix</h2>
 <p>In R matrices are an extension of the numeric or character vectors. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
 m</code></pre></div>
@@ -583,7 +641,7 @@ m</code></pre></div>
 <span class="kw">length</span>(matrix_example)</code></pre></div>
 <pre><code>## [1] 18</code></pre>
 <p><strong>Note</strong> Because a matrix is a vector with added dimension attributes, length gives you the total number of elements in the matrix.</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 15: </span> Consider the R output of the matrix below:</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 12: </span> Consider the R output of the matrix below:</p>
 <pre><code> [,1] [,2]</code></pre>
 <p>[1,] 4 1 [2,] 9 5 [3,] 10 7</p>
 <p>What was the correct command used to write this matrix? Examine each command and try to figure out the correct one before typing them. Think about what matrices the other commands will produce</p>
@@ -593,13 +651,38 @@ m</code></pre></div>
 <li>matrix(c(4, 9, 10, 1, 5, 7), nrow = 3)</li>
 <li>matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)</li>
 </ol>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">7</span>), <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>), <span class="dt">nrow =</span> <span class="dv">3</span>)</code></pre></div>
+<p></details></p>
 <p>cbind() and rbind() can be used to combine vectors to matrix. However, be careful that vectors can be recycled when combining.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>
 y &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">12</span>
 z &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">6</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(x, y)</code></pre></div>
+<pre><code>##      x  y
+## [1,] 1 10
+## [2,] 2 11
+## [3,] 3 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbind</span>(x, y)</code></pre></div>
+<pre><code>##   [,1] [,2] [,3]
+## x    1    2    3
+## y   10   11   12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(x,z)</code></pre></div>
+<pre><code>##      x z
+## [1,] 1 1
+## [2,] 2 2
+## [3,] 3 3
+## [4,] 1 4
+## [5,] 2 5
+## [6,] 3 6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbind</span>(x,z)</code></pre></div>
+<pre><code>##   [,1] [,2] [,3] [,4] [,5] [,6]
+## x    1    2    3    1    2    3
+## z    1    2    3    4    5    6</code></pre>
 </div>
-<div id="list" class="section level3">
-<h3>List</h3>
+<div id="list" class="section level2">
+<h2>List</h2>
 <p>In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called generic vectors, because the elements of a list can by of any type of R object, even lists containing further lists. This property makes them fundamentally different from atomic vectors.</p>
 <p>A list is a special type of vector. Each element can be a different type.</p>
 <p>Create lists using list() or coerce other objects using as.list().</p>
@@ -681,14 +764,19 @@ xlist</code></pre></div>
 <p>You can extract an element of a list using $ operator with the element’s name.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist<span class="op">$</span>b</code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 16: </span> What is the class of xlist[2]? What about xlist[[2]] and xlist$b ?</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 13: </span> What is the class of xlist[2]? What about xlist[[2]] and xlist$b ?</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(xlist[<span class="dv">2</span>])
+<span class="kw">class</span>(xlist[[<span class="dv">2</span>]])
+<span class="kw">class</span>(xlist<span class="op">$</span>b)</code></pre></div>
+<p></details></p>
 <ul>
 <li>The [ operator always returns an object of the same class as the original. It can be used to select multiple elements of an object</li>
 <li>The [[ operator is used to extract elements of a list or a data frame. It can only be used to extract a single element and the class of the returned object will not necessarily be a list or data frame.</li>
 <li>The $ operator is used to extract elements of a list or data frame by literal name. Its semantics are similar to that of [[.</li>
 </ul>
 <p>Lists can be extremely useful inside functions. You can âstapleâ together lots of different kinds of results into a single object that a function can return.</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 17: </span> I have three student’s results from two exams (both worth 50% of the total score) stored in an list “exam”. I have also caculated whether they passed the subject or not. Find out if I caculated any one incorrectly.</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 14: </span> I have three student’s results from two exams (both worth 50% of the total score) stored in an list “exam”. I have also caculated whether they passed the subject or not. Find out if I caculated any one incorrectly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exam&lt;-<span class="kw">list</span>(<span class="dt">name=</span><span class="kw">c</span>(<span class="st">&quot;Caroline&quot;</span>,<span class="st">&quot;Tyler&quot;</span>, <span class="st">&quot;David&quot;</span>),<span class="dt">exam1=</span><span class="kw">c</span>(<span class="dv">50</span>,<span class="dv">99</span>,<span class="dv">80</span>),<span class="dt">exam2=</span><span class="kw">c</span>(<span class="dv">40</span>,<span class="ot">NA</span>,<span class="dv">100</span>), <span class="dt">Passed=</span><span class="kw">c</span>(<span class="st">&quot;N&quot;</span>,<span class="st">&quot;Y&quot;</span>,<span class="st">&quot;Y&quot;</span>))
 exam</code></pre></div>
 <pre><code>## $name
@@ -702,9 +790,13 @@ exam</code></pre></div>
 ## 
 ## $Passed
 ## [1] &quot;N&quot; &quot;Y&quot; &quot;Y&quot;</code></pre>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exam<span class="op">$</span>exam2[<span class="kw">is.na</span>(exam<span class="op">$</span>exam2)]&lt;-<span class="dv">0</span>
+exam<span class="op">$</span>name[<span class="kw">ifelse</span>(exam<span class="op">$</span>exam1<span class="op">*</span><span class="fl">0.5</span><span class="op">+</span>exam<span class="op">$</span>exam2<span class="op">*</span><span class="fl">0.5</span><span class="op">&gt;=</span><span class="dv">50</span>,<span class="st">&quot;Y&quot;</span>,<span class="st">&quot;N&quot;</span>)<span class="op">!=</span>exam<span class="op">$</span>Passed]</code></pre></div>
+<p></details></p>
 </div>
-<div id="data-frame" class="section level3">
-<h3>Data frame</h3>
+<div id="data-frame" class="section level2">
+<h2>Data frame</h2>
 <p>A data frame is a very important data type in R. Its pretty much the de facto data structure for most tabular data and what we use for statistics.</p>
 <p>Data frames can have additional attributes such as rownames(), which can be useful for annotating data, like subject_id or sample_id. But most of the time they are not used.</p>
 <p>Some additional information on data frames: * Can convert to matrix with data.matrix() (preferred) or as.matrix() * Coercion will be forced and not always what you expect. * Can also create with data.frame() function. * Find the number of rows and columns with nrow(dat) and ncol(dat), respectively. * Rownames are usually 1, 2, â¦, n.</p>
@@ -724,12 +816,15 @@ dat</code></pre></div>
 ## 10  j 10 20</code></pre>
 <p>Useful Data Frame Functions * head() - shown first 6 rows * tail() - show last 6 rows * dim() - returns the dimensions * nrow() - number of rows * ncol() - number of columns * str() - structure of each column * names() - shows the names attribute for a data frame, which gives the column names.</p>
 <p>We will use the iris dataset here (<a href="https://en.wikipedia.org/wiki/Iris_flower_data_set" class="uri">https://en.wikipedia.org/wiki/Iris_flower_data_set</a>).</p>
-<div id="data-frame-index" class="section level4">
-<h4>Data frame index</h4>
+<div id="data-frame-index" class="section level3">
+<h3>Data frame index</h3>
 <p>A data frame, much like a matrix, has two dimensions rows and columns. To index a data frame (or a matrix), we use brackets in R next to the object, like so:</p>
 <p>iris[i, j]</p>
 <p>Where i denotes the rows that you want and j is the columns.</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 18: </span> :Extract the first 10 rows of the iris dataset.</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 15: </span> :Extract the first 10 rows of the iris dataset.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,]</code></pre></div>
+<p></details></p>
 <p>We can also extract individual columns of a data frame with the $ operator using column name.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris<span class="op">$</span>Species</code></pre></div>
 <pre><code>##   [1] setosa     setosa     setosa     setosa     setosa     setosa    
@@ -758,10 +853,15 @@ dat</code></pre></div>
 ## [139] virginica  virginica  virginica  virginica  virginica  virginica 
 ## [145] virginica  virginica  virginica  virginica  virginica  virginica 
 ## Levels: setosa versicolor virginica</code></pre>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 19: </span> Find out how many rows of data in iris dataset where Species is setosa.</p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 16: </span> Find out how many rows of data in iris dataset where Species is setosa.</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(iris[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&quot;setosa&quot;</span>,])
+<span class="co"># or</span>
+<span class="kw">nrow</span>(<span class="kw">subset</span>(iris,Species<span class="op">==</span><span class="st">&quot;setosa&quot;</span>))</code></pre></div>
+<p></details></p>
 </div>
-<div id="adding-columns-and-rows-in-dataframe" class="section level4">
-<h4>Adding columns and rows in dataframe</h4>
+<div id="adding-columns-and-rows-in-dataframe" class="section level3">
+<h3>Adding columns and rows in dataframe</h3>
 <p>We learned that the columns in a data frame were vectors, so that our data are consistent in type throughout the column. As such, if we want to add a new column, we need to start by making a new vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris<span class="op">$</span>year&lt;-<span class="dv">1936</span>
 <span class="kw">head</span>(iris)</code></pre></div>
@@ -773,15 +873,20 @@ dat</code></pre></div>
 ## 5          5.0         3.6          1.4         0.2  setosa 1936
 ## 6          5.4         3.9          1.7         0.4  setosa 1936</code></pre>
 </div>
-<div id="read-data" class="section level4">
-<h4>Read data</h4>
+<div id="read-data" class="section level3">
+<h3>Read data</h3>
 <p>To read a csv file, you can use read.csv() and read.table() function from your local computer. Files can also be downloaded directly from the Internet into a local folder of your choice onto your computer using the download.file function. The read.csv function can then be executed to read the downloaded file from the download location, for example,</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download.file(&quot;https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder-FiveYearData.csv&quot;, destfile = &quot;data/gapminder-FiveYearData.csv&quot;)</span>
+
+gapminder &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;gapminder-FiveYearData.csv&quot;</span>)</code></pre></div>
+<p></details></p>
 <p>Alternatively, you can also read in files directly into R from the Internet via specifying web address in read.csv. One should note that in doing this no local copy of the csv file is first saved onto your computer. For example,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder-FiveYearData.csv&quot;</span>)</code></pre></div>
 <p>Another type of file you might encounter are tab-separated value files (.tsv). To specify a tab as a separator, use “\t” or read.delim(). You can read directly from excel spreadsheets without converting them to plain text first by using the <a href="https://cran.r-project.org/web/packages/readxl/index.html">readxl</a> package.</p>
 </div>
-<div id="investigate-data-frame" class="section level4">
-<h4>Investigate data frame</h4>
+<div id="investigate-data-frame" class="section level3">
+<h3>Investigate data frame</h3>
 <p>The first thing we always do is check out what the data looks like. This can be easily done with str:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder)</code></pre></div>
 <pre><code>## 'data.frame':    1704 obs. of  6 variables:
@@ -795,9 +900,14 @@ dat</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(gapminder)</code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>** Note** A data frame is a list of vectors and factors, so length() returned number of elements (columns) in the the list.</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 20: </span> Extract names of countries which have life expectancy below 40s before 1980 (with one line of code).</p>
-<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 21: </span> Extract names of countries with increasing life expectancy only (with one line of code).</p>
-</div>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 17: </span> Extract names of countries which have life expectancy below 40s before 1980 (with one line of code).</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder[gapminder<span class="op">$</span>year<span class="op">&lt;</span><span class="dv">1980</span> <span class="op">&amp;</span><span class="st"> </span>gapminder<span class="op">$</span>lifeExp<span class="op">&lt;</span><span class="dv">40</span>,<span class="st">&quot;country&quot;</span>])</code></pre></div>
+<p></details></p>
+<p><span style="color:Green;font-weight: bold;font-size:1.2em ">Challenge 18: </span> Extract names of countries with increasing life expectancy only (with one line of code).</p>
+<p><details><summary>Your code</summary></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder<span class="op">$</span>country)[<span class="kw">as.vector</span>(<span class="kw">by</span>(gapminder<span class="op">$</span>lifeExp,gapminder<span class="op">$</span>country,<span class="cf">function</span>(x) <span class="kw">all</span>(x <span class="op">==</span><span class="st"> </span><span class="kw">cummax</span>(x))))]</code></pre></div>
+<p></details></p>
 </div>
 </div>
 <div id="key-points" class="section level2">

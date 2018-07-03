@@ -17,14 +17,25 @@
     text-align:left; width:100%;
 }
 
+.footnote {
+    color: black;
+    position: fixed; top: 92%;
+    text-align:left; width:100%;
+    font-size: 1em;
+}
 </style>
 
 
 R training
 ========================================================
 font-family: 'Helvetica'
+width: 1200
+height: 900
 
-![Alt Text](https://78.media.tumblr.com/e1712952f6eb24f418a997a8da6ae831/tumblr_ou1znif6LW1w4t58uo1_500.gif)
+
+
+<img src="https://78.media.tumblr.com/e1712952f6eb24f418a997a8da6ae831/tumblr_ou1znif6LW1w4t58uo1_500.gif" width="80%">
+
 
    
 <div style="color:white ;text-align: right"> Caroline Gao & Tyler Lane </div>
@@ -32,10 +43,24 @@ font-family: 'Helvetica'
 
 Welcome to the first SPHPM R Group Meeting!
 ========================================================
-* Purpose: 
-  - Create a community of R users
-  - Provide some training
-  - Tips on best practice
+* Who I am - Tyler Lane
+  - Post-doc in the Insurance, Work and Health Group
+  - R amateur (~2 years)
+  - SPSS refugee
+  - tyler.lane@monash.edu
+* I'll talk about
+  - SPHPM Group
+  - Reasons to use R
+  - Some simple code showing capabilities
+  - Unsolicited R learning advice
+
+
+SPHPM R Group purpose
+========================================================
+* Create a community of R users
+* Provide some training
+* Share resources
+* Tips on best practice
 
 
 
@@ -43,7 +68,6 @@ Welcome to the first SPHPM R Group Meeting!
 What stats packages do you currently use?
 ========================================================
 * MS Excel 
-  - My main stats software when I was a statistician in the UK govt!
 * SPSS
 * STATA
 * SAS
@@ -60,6 +84,8 @@ class: small-code
 * Extremely flexible
   - User-developed packages to do just about anything
 * Vibrant, passionate, and supportive user community
+* Easy to share code
+* Increasingly popular
 * Built-in datasets to practice with
 
 ```r
@@ -116,6 +142,7 @@ class: small-code
 
 ```r
 # load necessary package
+# install.packages("ggplot2") # If necessary remove first '#' to install ggplot2 package 
 library(ggplot2) 
 # convert target variable to factor with meaningful labels
 mtcars$Transmission <- factor(mtcars$am, 
@@ -132,7 +159,26 @@ ggplot(mtcars, aes(x = mpg, fill = Transmission)) +
 
 
 
-Testing transmission/fuel with simple code
+Testing transmission/fuel relationship with simple code
+========================================================
+class: small-code
+
+```r
+# Is fuel efficiency normally distributed?
+shapiro.test(mtcars # function for normal test(data.frame
+             $mpg) # variable, denoted with '$'
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  mtcars$mpg
+W = 0.94756, p-value = 0.1229
+```
+
+
+Testing transmission/fuel relationship with simple code
 ========================================================
 class: small-code
 
@@ -165,15 +211,16 @@ W = 42, p-value = 0.001871
 alternative hypothesis: true location shift is not equal to 0
 ```
 
-
-
+=======
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 Disadvantages of R
 ========================================================
 * Steep learning curve
 * Less support than commercial software
 * FRUSTRATING!
-![Alt Text](https://alfahir.hu/sites/default/files/styles/szeles/public/indexfotos/2018-04/g-ucpo_0.gif?itok=zwB7bbTC)
 
+
+<img src="https://alfahir.hu/sites/default/files/styles/szeles/public/indexfotos/2018-04/g-ucpo_0.gif?itok=zwB7bbTC" width="70%">
 
 
 My unsolicited advice
@@ -182,11 +229,28 @@ My unsolicited advice
 * Guitar: Learn scales, then Wonderwall
 * R: Learn Wonderwall, then scales
 
-![Alt Text](http://31.media.tumblr.com/tumblr_m8mm9zMnGo1qkyzquo1_500.gif)
+
+<img src="http://31.media.tumblr.com/tumblr_m8mm9zMnGo1qkyzquo1_500.gif" width="70%">
+
+
+Reproducible research
+========================================================
+
+Re-run, repeat, reproduce, reuse, replicate: transforming code into scientific contributionn, by Benureau & Rougier (2018) 
+
+* Re-runnable (R1)
+* Repeatable (R2)
+* Reproducible (R3) 
+* Reusable (R4)
+* Replicable (R5)
 
 
 
+<<<<<<< HEAD
 Key points we'll talk about today
+=======
+Re-runnable
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 ========================================================
 * Reproducibility
 * Readability/reusability
@@ -194,28 +258,43 @@ Key points we'll talk about today
   - Tracking package dependencies per project using packrat or checkpoint
 ![Alt Text](http://revolution-computing.typepad.com/.a/6a010534b1db25970b01bb0794c2fc970d-800wi) 
 
+<<<<<<< HEAD
+=======
+* Ignoring package version control??
+* Tracking package dependencies per project using packrat or checkpoint
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 
 
-Reproducibility
+<div class="footnote">
+https://xkcd.com/234/ </div>
+
+Repeatable
 ========================================================
-Project management 
-* Keep source data in zip file
-* Store all data and analyses code on netdrive 
-* Documentations
-* ...
 
-Related to R
-* Pay attention to random number generator
-* Separate data cleaning code and analysis code
-* Git version control
+Produce the same output over successive runs of your code
+
+* Set seed for pseudo-random number generators
+* Store randomly generated data in a file
 * ...
 
 
+Reproducible
+========================================================
 
-Reproducibility/Reusability
+A result is said to be reproducible if another researcher can: 
+
+* take the original code and input data,
+* execute it, 
+
+then re-obtain the same result.
+
+**Some code might depend on execution environment and platform**, hence assertions such as "the results were obtained with  Windows R x64 3.3.4 " are valuable
+
+
+Reusable
 ========================================================
 class: small-code
-Caroline's code from 10 years ago (???, like Finnegans Wake)
+Caroline's code from 10 years ago
 ```{ r,eval=FALSE}
 particlechange<-c(50)
 for( g in 1:30)
@@ -239,52 +318,84 @@ r<-1-exp(-4*1*0.001386*0.48*particlesum[x*10]*tcid[y*10]*1000000*0.001/(3*(x*0.2
 z<-outer(x,y,f)
 ```
 
-Reproducibility/Reusability
+From she knows what she was doing to only god knows what she was doing :( 
+
+Reusable
 ========================================================
+<<<<<<< HEAD
 class: small-code
-Caroline's code now (clear like Hemingway)
+Caroline's code now
+=======
+
+Caroline's code now: 
+
+>>>>>>> 47630fad6871c892a1b82eee85373dfb8608595f
 
 ```r
-#Extract median, range and max PM2.5 for each SA2 areas
-fire_area<-Ambo_timeseries %>%
+#Extract median ambulance rates for each SA2 areas
+Median_SA2<-Ambo_timeseries %>%
     select(SA2_NAME11,All, pop, Date) %>% 
     #exclude data during industrial action
     na.omit() %>%
     #calculate rates
     mutate(rate=All*10000/pop) %>% 
-    #obtain median and interquartile range by SA2 name
+    #obtain median rate by SA2 name
     group_by(SA2_NAME11) %>% 
-    summarise(Median=format(round(quantile(rate, probs=0.5),1), nsmall=1),
-              "Interquartile range"= paste0(format(round(quantile(rate, probs=0.25),1),nsmall=1),"-" , format(round(quantile(rate, probs=0.75),1),nsmall=1)))
+    summarise(Median=format(round(quantile(rate, probs=0.5),1), nsmall=1))
 ```
 
-Reusability
+Better now? 
+
+Reusable
 ========================================================
-* Always try to write 'pretty' code
-* Think about naming of datasets and variables 
-* Try to write functions for repetitive work
+
+You don't really want this:
+
+<img src="https://imgs.xkcd.com/comics/code_quality.png" width="80%">
+
+
+<div class="footnote">
+https://xkcd.com/1513/ </div>
+
+
+Replicable 
+========================================================
+<br> 
+
+
+<img src="Week 1-figure/share_research_code.png" width="85%">
+
+
+
+
 
 Efficiency
 ========================================================
 
-![Alt Text](https://csgillespie.github.io/efficientR/figures/f0_web.png)
 
-Efficiency
-========================================================
+<br>
 
-* Efficient programming
+
+<img src="https://csgillespie.github.io/efficientR/figures/f0_web.png" width="80%">
+
+***
+
+<br> <br> <br>
+
+* **Efficient programming**
 * Efficient workflow
 * Efficient input/output
-* Efficient data carpentry
+* **Efficient data carpentry**
 * Efficient optimisation
+
 
 House keeping
 ========================================================
 * Install R and Rstudio
 * Install package: knit, ggplot2, dplyr, tidyr
 * Download Github study material from: https://github.com/CarolineXGao/SPHPM_R_group (use the Clone or download button).
-* There are some additional study materials provided in Part 1 (coursea video lectures, swirl etc) feel free to get started before next week
-
+* Feel free to start reading the training document before next week (Part_1.html), we will only cover selective materials
+* There are some also additional study materials provided in Part 1 (coursea video lectures, swirl etc) for your interest
 
 
 
